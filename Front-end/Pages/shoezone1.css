@@ -39,10 +39,14 @@
 .item:hover{
 	border-bottom: solid;
 	border-bottom-width:2.4px;
-	border-botom: #FF0004;
 	color:darkorange;
 	background:#EFEFEF;
 	transition:.2s;
+}
+.search{
+	width:300px !important;
+	height:40px !important;
+	margin:22px 0 0 100px !important;
 }
 .material-icons{
 	color: black;
@@ -94,6 +98,7 @@ img {
   border-radius: 0 3px 3px 0;
   user-select: none;
   -webkit-user-select: none;
+  text-decoration: none;
 }
 
 /* Position the "next button" to the right */
@@ -149,12 +154,12 @@ img {
 .flex{
 	display:flex;
 	justify-content: center;
-	justify-content: space-around;
+	justify-content: space-evenly;
 	flex-wrap: wrap;
 }
 .box {
   padding: 0px;
-  background-color: green;
+  background-color: white;
   transition: transform .2s; /* Animation */
   width: 280px;
   height: 350px;
@@ -184,9 +189,77 @@ img {
 	justify-content: space-around;
 	background:#111;
 }
-
-
-
-
-
-
+.search_ipad{
+	display:none;
+}
+.hot{
+	text-align:center;
+	font-size: 80px;
+	color:darkorange;
+	font-weight: bolder;
+	padding-bottom:10px;
+}
+.phone{
+	margin:15px 0px;
+	 float: left;
+}
+.nmra{
+	color: white;
+	display: inline;
+	padding:19px 8px;
+}
+@media(max-width:1025px){
+	.box{
+		margin-bottom:50px;
+	}
+	.ul{
+		display:none;
+	}
+	.search{
+		
+	 display:none !important;
+	}
+	.search_ipad{
+		display:flex !important;
+		justify-content:space-evenly !important;
+	}
+	.ipad{
+		display: none;
+	}
+	.nav{
+		display:flex;
+		justify-content: center;
+	}
+  }
+  @media(max-width:480px){
+	.hot{
+		display:block;
+		font-size:47px;
+	}
+	.next,.prev{
+		margin-top:0.85mm;
+	}
+	.iconmob{
+		width:28px;
+	}
+	.headmobile{
+		font-size: 19px;
+	}
+	.nmra{
+		font-size:12px;
+		line-height: 40px;;
+	}
+  }
+  @media(min-width:1580px){
+   .nav{
+	display:flex;
+	justify-content: center;
+	justify-content: space-evenly;
+   }
+   .logo{
+	align-self: left;
+   }
+  .hot{
+	text-align: center;
+  }
+  }
