@@ -21,7 +21,7 @@
 	margin-top:-8px;
 	padding:0;
 	list-style: none;
-	
+
 }
 .ul{
 	margin-left:15vw;
@@ -171,14 +171,14 @@ img {
 }
 .name{
 	position:relative;top:2%;right:-2%;
-	
+
 }
 .price{
 	position:relative;top:130%;left:58%;
 }
 .img{
 	width:280px;
-	
+
 }
 .footer{
 	margin-top:80px;
@@ -216,7 +216,7 @@ img {
 		display:none;
 	}
 	.search{
-		
+
 	 display:none !important;
 	}
 	.search_ipad{
