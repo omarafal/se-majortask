@@ -4,14 +4,12 @@ from django.contrib.auth.models import User
 
 
 class Shoe(models.Model):
-    brands_List = (
-        ('1', 'Nike'),
-        ('2', 'Adidas'),
-        ('3', 'Converse'),
-        ('4', 'New Balance')
-    )
     name = models.CharField(max_length=100)
-    brand = models.CharField(max_length=20, default="Nike", choices=brands_List)
+    brand = models.CharField(max_length=20, default="Nike")
+    price = models.CharField(max_length=10, default="EGP 50")
+    color = models.CharField(max_length=50, default="White")
+    Type = models.CharField(max_length=10, default="Men")
+    img = models.ImageField(upload_to='shoes_images')
 
     def __str__(self):
         return self.name
