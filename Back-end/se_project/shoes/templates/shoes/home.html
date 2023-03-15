@@ -22,15 +22,15 @@
     <nav class="nav">
         <span class="logo"><img src="../../../media/shoes/Media/logo.png "  style="height:50px;"/></span>
         <ul class="ul ipad">
-            <a href="{% url 'shoes-home' %}" style="text-decoration: none;"><li class="item" >HOME</li></a>
-            <a href="{% url 'shoes-men' %}" style="text-decoration: none;"><li class="item">MEN</li></a>
-            <a href="{% url 'shoes-women' %}" style="text-decoration: none;"><li class="item">WOMEN</li></a>
+            <a href="{% url 'shoes-home' %}" style="text-decoration: none;"><li class="item" >Home</li></a>
+            <a href="{% url 'shoes-men' %}" style="text-decoration: none;"><li class="item">Men</li></a>
+            <a href="{% url 'shoes-women' %}" style="text-decoration: none;"><li class="item">Women</li></a>
         </ul>
 
-        <form class="input-group search ipad " method=POST action="{% url 'search_shoes' %}">
-                {% csrf_token %}
- 				 <input type="search" class="form-control " placeholder="Search For Brands" aria-label="Search" aria-describedby="search-addon" name="searched" />
- 				 <button type="submit" class="btn btn-outline-primary">search</button>
+        <form class="d-flex input-group search" role="search" method=POST action="{% url 'search_shoes' %}">
+            {% csrf_token %}
+            <input class="form-control" type="search" placeholder="Search For a Brand" aria-label="Search" name="searched" />
+            <button class="btn btn-outline-primary" type="submit" >Search</button>
 			</form>
 
         <span class="ipad" style="margin:17px 0 0 30px;">
@@ -127,9 +127,9 @@
     </div>
     <h2 style="text-align:center;margin:20px;">NEW PRODUCTS</h2>
     <div class="flex">
-        <div class="box"><img src="../../../media/shoes/Media/shoe1.png" class="img"><p class="name">nike shoes<span class="price">225$</span></p></div>
-        <div class="box"><img src="../../../media/shoes/Media/shoe2.png" class="img"><p class="name">nike shoes<span class="price">225$</span></p></div>
-        <div class="box"><img src="../../../media/shoes/Media/shoe3.png" class="img"><p class="name">nike shoes<span class="price">225$</span></p></div>
+        <div class="search_box"><img src="../../../shoes_images/17.jpg" class="img"><p class="name"><span class="Name_box">Air More</span><span class="Price_box">EGP 500</span></p></div>
+        <div class="search_box"><img src="../../../shoes_images/12.jpg" class="img"><p class="name"><span class="Name_box">Air More Up-Tempo</span><span class="Price_box">EGP 620</span></p></div>
+        <div class="search_box"><img src="../../../shoes_images/4.jpg" class="img"><p class="name"><span class="Name_box">M2K</span><span class="Price_box">EGP 450</span></p></div>
     </div>
 
 </main>

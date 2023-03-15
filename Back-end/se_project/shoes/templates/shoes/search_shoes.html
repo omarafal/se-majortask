@@ -24,16 +24,16 @@
     <nav class="nav">
         <span class="logo"><img src="../../../media/shoes/Media/logo.png "  style="height:50px;"/></span>
         <ul class="ul ipad">
-            <a href="{% url 'shoes-home' %}" style="text-decoration: none;"><li class="item" >HOME</li></a>
-            <a href="{% url 'shoes-men' %}" style="text-decoration: none;"><li class="item">MEN</li></a>
-            <a href="{% url 'shoes-women' %}" style="text-decoration: none;"><li class="item">WOMEN</li></a>
+            <a href="{% url 'shoes-home' %}" style="text-decoration: none;"><li class="item" >Home</li></a>
+            <a href="{% url 'shoes-men' %}" style="text-decoration: none;"><li class="item">Men</li></a>
+            <a href="{% url 'shoes-women' %}" style="text-decoration: none;"><li class="item">Women</li></a>
         </ul>
 
-        <form class="input-group search ipad " method=POST action="{% url 'search_shoes' %}">
+        <form class="d-flex input-group search" role="search" method=POST action="{% url 'search_shoes' %}">
             {% csrf_token %}
- 				 <input type="search" class="form-control " placeholder="Search For Brands" aria-label="Search" aria-describedby="search-addon" name="searched" />
- 				 <button type="submit" class="btn btn-outline-primary">search</button>
-			</form>
+            <input class="form-control" type="search" placeholder="Search For Other Brand" aria-label="Search" name="searched" />
+            <button class="btn btn-outline-primary" type="submit" >Search</button>
+            </form>
 
         <span class="ipad" style="margin:17px 0 0 30px;">
 				<a href="#"><i class="material-icons" style="font-size:42px;">shopping_cart</i></a>
@@ -63,9 +63,11 @@
         <h1 align="center"> You Searched For {{ searched }}</h1>
         <br/>
         {% if shoes_brands %}
+            <div class="flex">
             {% for i in shoes_brands %}
-                <div class="search_box"><img src="../../../{{ i.img }}" class="img"><p class="name">{{ i.name }} ({{ i.color }})<span class="price">{{ i.price }}</span></p></div>
+                <div class="search_box"><img src="../../../{{ i.img }}" class="img"><p class="name"><span class="Name_box">{{ i.name }}</span><span class="Price_box">{{ i.price }}</span></p></div>
             {% endfor %}
+            </div>
         {% else %}
             <h1 align="center"> Nothing Found :(</h1>
         {% endif %}
