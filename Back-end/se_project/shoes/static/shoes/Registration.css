@@ -86,24 +86,28 @@ body {
     background-color: #034694;
 }
 }
-@media(max-width:712px){
-	body{
+@media(max-width:712px) {
+	body {
 		background-image: url("../../../media/shoes/Media/712.jpg") !important;
-		background-size:cover;
+		background-size: cover;
 		background-repeat: no-repeat;
-		margin:0;
-		padding:0;
+		margin: 0;
+		padding: 0;
 	}
+
 	#form button {
-    background-color: #034694;
-   
+		background-color: #034694;
+
+	}
 }
 @media(max-width:450px){
 	body{
-	background-image: url() !important;
+	background-image: url("../../../media/shoes/Media/412.jpg") !important;
+		background-size: cover;
+		background-repeat: no-repeat;
 	background-color:#0071c5 !important;
 	width:100%;
-	
+
 	}
 	.container{
 		justify-content: space-around;
@@ -113,5 +117,17 @@ body {
 		margin-left:0;
 		margin-right:0;
 	}
-}
+	#form button {
+		background-color: #e9a060;
 
+	}
+}
+@media(max-width:380px) {
+	body {
+		background-image: url("../../../media/shoes/Media/375.jpg") !important;
+		background-size: cover;
+		background-repeat: no-repeat;
+		margin: 0;
+		padding: 0;
+	}
+}
