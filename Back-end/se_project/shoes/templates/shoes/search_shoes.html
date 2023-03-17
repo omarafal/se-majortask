@@ -25,8 +25,8 @@
         <span class="logo"><img src="../../../media/shoes/Media/logo.png "  style="height:50px;"/></span>
         <ul class="ul ipad">
             <a href="{% url 'shoes-home' %}" style="text-decoration: none;"><li class="item" >Home</li></a>
-            <a href="{% url 'shoes-men' %}" style="text-decoration: none;"><li class="item">Men</li></a>
-            <a href="{% url 'shoes-women' %}" style="text-decoration: none;"><li class="item">Women</li></a>
+            <a href="{% url 'men' %}" style="text-decoration: none;"><li class="item">Men</li></a>
+            <a href="{% url 'women' %}" style="text-decoration: none;"><li class="item">Women</li></a>
         </ul>
 
         <form class="d-flex input-group search" role="search" method=POST action="{% url 'search_shoes' %}">

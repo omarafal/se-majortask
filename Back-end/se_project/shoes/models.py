@@ -3,10 +3,20 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 
 
+class User(models.Model):
+    username = models.CharField(max_length=100)
+    email = models.CharField(max_length=100)
+    password = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.username
+
+
 class Shoe(models.Model):
     name = models.CharField(max_length=100)
     brand = models.CharField(max_length=20, default="Nike")
     price = models.CharField(max_length=10, default="EGP 50")
+    sizes = models.CharField(max_length=50, default="Small, Medium, Large")
     color = models.CharField(max_length=50, default="White")
     Type = models.CharField(max_length=10, default="Men")
     img = models.ImageField(upload_to='shoes_images')

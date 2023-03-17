@@ -131,10 +131,3 @@ body {
 		padding: 0;
 	}
 }
-@media(max-width:321px){
-	#form{
-		margin-bottom:80px;
-	}
-
-}
-

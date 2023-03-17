@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Shoe
+from .models import *
 
 
 def home(request):
@@ -13,6 +13,17 @@ def search_shoes(request):
         return render(request, 'shoes/search_shoes.html', {'searched': searched, 'shoes_brands': shoes_brands})
     else:
         return render(request, 'shoes/search_shoes.html')
+
+
+def registration(request):
+    return render(request, 'shoes/registration.html')
+
+
+def sign_in(request):
+    context = {
+        'Users': User.objects.all()
+    }
+    return render(request, 'shoes/sign_in.html', context)
 
 
 def men(request):
