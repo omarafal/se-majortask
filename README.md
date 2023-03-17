@@ -20,7 +20,7 @@
 
 #
 
-This a web application made for selling shoes for the shop "Shoezone" as a major task for our "Software Engineering" course.
+This is a web application made for selling shoes for the shop "Shoezone" as a major task for our "Software Engineering" course.
 
 The website contains the following pages:
 - Home/index
