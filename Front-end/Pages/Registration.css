@@ -1,5 +1,5 @@
 body {
-	background-image: url("shoe.jpg");
+	background-image: url("../Media/shoe.jpg");
 	background-size:cover;
 	background-repeat: no-repeat;
 	margin:0;
@@ -73,7 +73,7 @@ body {
 }
 @media(max-width:1030px){
 	body{
-		background-image: url("pxfuel.jpg") !important;
+		background-image: url("../Media/1024.jpg") !important;
 		background-size:cover;
 		background-repeat: no-repeat;
 		margin:0;
@@ -86,24 +86,28 @@ body {
     background-color: #034694;
 }
 }
-@media(max-width:712px){
-	body{
-		background-image: url("712.jpg") !important;
-		background-size:cover;
+@media(max-width:712px) {
+	body {
+		background-image: url("../Media/712.jpg") !important;
+		background-size: cover;
 		background-repeat: no-repeat;
-		margin:0;
-		padding:0;
+		margin: 0;
+		padding: 0;
 	}
+
 	#form button {
-    background-color: #034694;
-   
+		background-color: #034694;
+
+	}
 }
 @media(max-width:450px){
 	body{
-	background-image: url() !important;
+	background-image: url("../Media/412.jpg") !important;
+		background-size: cover;
+		background-repeat: no-repeat;
 	background-color:#0071c5 !important;
 	width:100%;
-	
+
 	}
 	.container{
 		justify-content: space-around;
@@ -113,5 +117,23 @@ body {
 		margin-left:0;
 		margin-right:0;
 	}
-}
+	#form button {
+		background-color: #e9a060;
 
+	}
+}
+@media(max-width:380px) {
+	body {
+		background-image: url("../Media/375.jpg") !important;
+		background-size: cover;
+		background-repeat: no-repeat;
+		margin: 0;
+		padding: 0;
+	}
+}
+@media(max-width:321px){
+	#form{
+		margin-bottom:80px;
+	}
+
+}
