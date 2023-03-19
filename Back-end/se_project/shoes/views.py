@@ -1,5 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
+from .form import *
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib import messages
+from django.contrib.auth import authenticate, login
 
 
 def home(request):
@@ -16,14 +20,29 @@ def search_shoes(request):
 
 
 def registration(request):
-    return render(request, 'shoes/registration.html')
+    if request.method == "POST":
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Your Account is Created Successfully")
+            return redirect('sign_in')
+        else:
+            messages.error(request, "Password Doesn't Match :(")
+    else:
+        form = RegistrationForm()
+    return render(request, 'shoes/registration.html', {'form': form})
 
 
 def sign_in(request):
-    context = {
-        'Users': User.objects.all()
-    }
-    return render(request, 'shoes/sign_in.html', context)
+    if request.method == "POST":
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            return redirect('shoes-home')
+        else:
+            messages.error(request, "Wrong Username or Password :(")
+    else:
+        form = AuthenticationForm()
+    return render(request, 'shoes/sign_in.html', {'form': form})
 
 
 def men(request):
