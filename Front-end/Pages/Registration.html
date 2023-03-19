@@ -9,33 +9,39 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="Registration.css">
+    <link rel="icon" type="image/x-icon" href="../Media/favicon.png">
+    
     <script defer src="Registration.js"></script>
 </head>
 <body>
     <div class="container">
-        <form id="form" action="/">
+        <form id="form" method="POST">
             <h1>Sign Up</h1>
             <div class="input-control">
                 <label class ="label" for="username">Username</label>
-                <input id="username" name="username" type="text">
+                {{ form.username }}
+<!--                <input id="username" name="username" type="text">-->
                 <div class="error"></div>
             </div>
             <div class="input-control">
                 <label class ="label" for="email">Email</label>
-                <input id="email" name="email" type="text">
+                {{ form.email }}
+<!--                <input id="email" name="email" type="text">-->
                 <div class="error"></div>
             </div>
             <div class="input-control">
                 <label class="label" for="password">Password</label>
-				<input id="password"name="password" type="password"/>
+                {{ form.password1 }}
+				<!--<input id="password"name="password" type="password"/>-->
                 <div class="error"></div>
             </div>
             <div class="input-control">
                 <label class="label" for="password2">Confirm Password</label>
-                <input id="password2"name="password2" type="password">
+                {{ form.password2 }}
+                <!--<input id="password2"name="password2" type="password">-->
                 <div class="error"></div>
             </div>
-            <button type="submit">Sign Up</button>
+            <button type="submit" class="submit"> Sign Up</button>
         </form>
     </div>
 </body>
