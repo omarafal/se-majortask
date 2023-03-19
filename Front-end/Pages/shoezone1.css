@@ -152,7 +152,7 @@
 		border-radius: 10px;
 		background:#E5E5E5;
 		color:darkorange;
-		transition:.2s;
+		transition:.15s;
 	}
 	/*Slider Style*/
 	.slider{
@@ -187,6 +187,7 @@
 		line-height: 20px;
 	}
 }
+/*Small Screens View*/
 @media (max-width: 378px){
 	.headmobile{
 		font-size: 16px;
