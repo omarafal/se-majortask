@@ -7,7 +7,10 @@ from django.contrib.auth import authenticate, login
 
 
 def home(request):
-    return render(request, 'shoes/home.html')
+    context = {
+        'shoes': Shoe.objects.all()
+    }
+    return render(request, 'shoes/home.html', context)
 
 
 def search_shoes(request):
@@ -51,3 +54,10 @@ def men(request):
 
 def women(request):
     return render(request, 'shoes/women.html')
+
+
+def cart(request):
+    context = {
+        'shoes': Shoe.objects.all()
+    }
+    return render(request, 'shoes/shoppingcart.html', context)
