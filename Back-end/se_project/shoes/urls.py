@@ -10,4 +10,5 @@ urlpatterns = [
     path('search_shoes/', views.search_shoes, name='search_shoes'),
     path('registration/', views.registration, name='registration'),
     path('sign_in/', views.sign_in, name='sign_in'),
+    path('cart/', views.cart, name='cart'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
