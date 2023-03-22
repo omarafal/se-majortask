@@ -1,7 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from .form import *
+from django.urls import reverse
+from django.http import HttpResponse, Http404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 
@@ -28,7 +31,7 @@ def registration(request):
         if form.is_valid():
             form.save()
             messages.success(request, "Your Account is Created Successfully")
-            return redirect('sign_in')
+            return redirect('login')
         else:
             messages.error(request, "Password Doesn't Match :(")
     else:
@@ -57,7 +60,44 @@ def women(request):
 
 
 def cart(request):
+    total_price = 0
     context = {
-        'shoes': Shoe.objects.all()
+        'shoes': Shoe.objects.all(),
+        'cart_items': User_Order.objects.filter(owner_id=request.user.id),
     }
+    for i in context['cart_items']:
+        temp = ''
+        for j in i.price:
+            if j.isnumeric():
+                temp += j
+        total_price += int(temp)
+    total_items = context['cart_items'].count()
+    context['no_items'] = total_items
+    context['total_price'] = total_price
+    context['price_with_shipping'] = total_price + 40
+
     return render(request, 'shoes/shoppingcart.html', context)
+
+
+# def recipe_delete_view(request, id=None):
+#     try:
+#         obj = User_Order.objects.get(id=id, user=request.user)
+#     except:
+#         obj = None
+#     if obj is None:
+#         if request.htmx:
+#             return HttpResponse("Not Found")
+#         raise Http404
+#     if request.method == "POST":
+#         obj.delete()
+#         success_url = reverse('cart:list')
+#         if request.htmx:
+#             headers = {
+#                 'HX-Redirect': success_url
+#             }
+#             return HttpResponse("Success", headers=headers)
+#         return redirect(success_url)
+#     context = {
+#         "object": obj
+#     }
+#     return render(request, "shoes/delete.html", context)
