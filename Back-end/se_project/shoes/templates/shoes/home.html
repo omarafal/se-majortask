@@ -37,15 +37,15 @@
                     <a href="{% url 'women' %}" style="text-decoration: none;" class="nav-link active item_menu" aria-current="page">
                         <li class="item nav-item menu_hover">Women</li>
                     </a>
-                    <a href="{% url 'cart' %}" style="text-decoration: none;" class="nav-link active item_menu menu" aria-current="page" >
-                        <li class="item nav-item menu_hover">Shopping Cart</li>
-                    </a>
+                        <a href="{% url 'cart' %}" style="text-decoration: none;" class="nav-link active item_menu menu" aria-current="page" >
+                            <li class="item nav-item menu_hover">Shopping Cart</li>
+                        </a>
                     <li class="nav-item dropdown menu item">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: black">
                             Profile
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item dropmenu_hover" href="{% url 'sign_in' %}" name="register">SignIn/SignUp</a></li>
+                            <li><a class="dropdown-item dropmenu_hover" href="{% url 'login' %}" name="register">SignIn/SignUp</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -55,17 +55,34 @@
                     <button class="btn btn-outline-primary" type="submit" >Search</button>
                 </form>
             </div>
-            <li class="nav-item ipad">
-                <a class="nav-link " href="{% url 'cart' %}">
-                    <i class="material-icons" style="font-size:42px;margin:5px 0px 0px 23px;">shopping_cart</i>
-                </a>
-            </li>
+            <script>
+                function myfunction(){
+                    alert("Please Sign in :(");
+                }
+            </script>
+            {% if user.is_authenticated %}
+                <li class="nav-item ipad">
+                    <a class="nav-link " href="{% url 'cart' %}">
+                        <i class="material-icons" style="font-size:42px;margin:5px 0px 0px 23px;">shopping_cart</i>
+                    </a>
+                </li>
+            {% else %}
+                <li class="nav-item ipad">
+                    <a class="nav-link " onclick="myfunction()" href="">
+                        <i class="material-icons" style="font-size:42px;margin:5px 0px 0px 23px;">shopping_cart</i>
+                    </a>
+                </li>
+            {% endif %}
             <li class="nav-item dropdown ipad" style="margin-top: -10px">
                 <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="bi bi-person-circle material-icons" style="font-size:38px; margin:0px 0px 0px 16px;"></i>
                 </a>
                 <ul class="dropdown-menu" style="margin:1.4vw 0vw 0vw -190%">
-                    <li><a class="dropdown-item dropmenu_hover" href="{% url 'sign_in' %}" name="register">SignIn/SignUp</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a class="dropdown-item dropmenu_hover" href="{% url 'logout' %}" name="register">Logout</a></li>
+                    {% else %}
+                        <li><a class="dropdown-item dropmenu_hover" href="{% url 'login' %}" name="register">SignIn/SignUp</a></li>
+                    {% endif %}
                 </ul>
             </li>
         </div>

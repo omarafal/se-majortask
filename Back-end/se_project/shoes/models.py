@@ -7,7 +7,7 @@ class Shoe(models.Model):
     name = models.CharField(max_length=100)
     brand = models.CharField(max_length=20, default="Nike")
     price = models.CharField(max_length=10, default="EGP 50")
-    sizes = models.CharField(max_length=50, default="42")
+    size = models.CharField(max_length=50, default="42")
     color = models.CharField(max_length=50, default="White")
     Type = models.CharField(max_length=10, default="Men")
     img = models.ImageField(upload_to='shoes_images')
@@ -15,3 +15,11 @@ class Shoe(models.Model):
     def __str__(self):
         return self.name
 
+
+class User_Order(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    price = models.CharField(max_length=10, default="EGP 50")
+    size = models.CharField(max_length=50, default="42")
+    color = models.CharField(max_length=50, default="White")
+    img = models.ImageField(upload_to='shoes_images')

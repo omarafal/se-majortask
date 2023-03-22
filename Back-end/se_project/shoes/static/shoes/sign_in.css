@@ -22,9 +22,26 @@ body {
     font-size: 12px;
 }
 
+#form_logout{
+	width: 500px;
+	height:150px;
+	margin-top: 15vh;
+	padding: 20px;
+	background-color: whitesmoke;
+	border-radius: 4px;
+	font-size: 12px;
+	border-radius: 8px;
+}
+
 #form h1 {
     color: #0f2027;
     text-align: center;
+}
+
+.anker{
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
 }
 
 #form button {
