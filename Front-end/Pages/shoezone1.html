@@ -57,12 +57,12 @@
 			</div>
 			<li class="nav-item ipad">
 				 <a class="nav-link " href="ShoppingCart.html">
-					<i class="material-icons" style="font-size:42px;margin:5px 0px 0px 23px;">shopping_cart</i>
+					<i class="material-icons" style="font-size:42px;margin:5px 0px 0px 23px;" title="Shopping Cart">shopping_cart</i>
 				 </a>
 			</li>
 			<li class="nav-item dropdown ipad" style="margin-top: -10px">
 				 <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-					<i class="bi bi-person-circle material-icons" style="font-size:38px; margin:0px 0px 0px 16px;"></i>
+					<i class="bi bi-person-circle material-icons" style="font-size:38px; margin:0px 0px 0px 16px;" title="Profile"></i>
 				 </a>
 				 <ul class="dropdown-menu" style="margin:1.4vw 0vw 0vw -190%">
 					<li><a class="dropdown-item dropmenu_hover" href="#">SignIn/SignUp</a></li>
@@ -73,7 +73,7 @@
 </header>
 <main>
 	<!--TITLE-->
-    <div style="background-color: #D0D0D0">
+    <div style="background-color: #D0D0D0;">
 		<h2 class="hot">HOT DEALS!</h2>
 	</div>
 	<!--Slider-->
@@ -122,7 +122,7 @@
 		 </button>	
 	</div>
 	<!--NEW PRODUCTS-->
-    <div data-aos="zoom-in" data-aos-duration="600" data-aos-delay="0"><h1 style="text-align:center;margin:20px;">NEW PRODUCTS</h1></div>
+    <div data-aos="zoom-in" data-aos-offset="150" data-aos-delay="0"><h1 style="text-align:center;margin:20px;">NEW PRODUCTS</h1></div>
     <div class="flex">
     <!--<div class="box"><img src="../../../media/shoes/Media/shoe1.png" class="img">
 			<p class="name">nike shoes<span class="price">225$</span></p>
@@ -133,7 +133,7 @@
         <div class="box"><img src="../../../media/shoes/Media/shoe3.png" class="img">
 			<p class="name">nike shoes<span class="price">225$</span></p>
 		</div>-->
-		<div  data-aos="fade-up" data-aos-duration="600" data-aos-delay="100">
+		<div  data-aos="fade-up" data-aos-delay="100">
 			<div class="box"><img src="../Media/item1.jpg" class="img">
 				<div>
 				<span class="name">Nike Air Force 1</span>
@@ -141,7 +141,7 @@
 				</div>
 			</div>
 		</div>
-		<div  data-aos="fade-up" data-aos-duration="600" data-aos-delay="200">
+		<div  data-aos="fade-up" data-aos-delay="200">
 			<div class="box "><img src="../Media/item2.jpg" class="img">
 				<div>
 					<span class="name">Nike Air Jordan IV</span>
@@ -149,7 +149,7 @@
 				</div>
 			</div>
 		</div>
-		<div  data-aos="fade-up" data-aos-duration="600" data-aos-delay="300">
+		<div  data-aos="fade-up" data-aos-delay="300">
 			<div class="box"><img src="../Media/item3.jpg" class="img">
 				<div>
 					<span class="name">Nike M2K Tekno</span>
@@ -157,7 +157,7 @@
 				</div>
 			</div>
 		</div>
-		<div  data-aos="fade-up" data-aos-duration="600" data-aos-delay="400">
+		<div  data-aos="fade-up" data-aos-delay="400">
 			<div class="box"><img src="../Media/item4.jpg" class="img">
 				<div>
 					<span class="name">Nike Air</span>
@@ -200,6 +200,10 @@
 </section>
 </body>
 	  <script>
-    AOS.init();
+    AOS.init({
+		duration:800,
+		offset:300,
+		easing:'ease-out-back',
+	});
   </script>
 </html>
