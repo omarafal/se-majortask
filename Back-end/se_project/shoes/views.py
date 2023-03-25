@@ -11,7 +11,9 @@ from django.contrib.auth import authenticate, login
 
 def home(request):
     context = {
-        'shoes': Shoe.objects.all()
+        'shoes': Shoe.objects.all(),
+        'class_css': 'p-0 m-0 border-0 bd-example',
+        'nav': True,
     }
     return render(request, 'shoes/home.html', context)
 
@@ -20,9 +22,15 @@ def search_shoes(request):
     if request.method == "POST":
         searched = request.POST['searched']
         shoes_brands = Shoe.objects.filter(brand__contains=searched)
-        return render(request, 'shoes/search_shoes.html', {'searched': searched, 'shoes_brands': shoes_brands})
+        context = {
+            'searched': searched,
+            'shoes_brands': shoes_brands,
+            'page_name': 'search results',
+            'nav': True,
+        }
+        return render(request, 'shoes/search-shoes.html', context)
     else:
-        return render(request, 'shoes/search_shoes.html')
+        return render(request, 'shoes/search-shoes.html')
 
 
 def registration(request):
@@ -64,6 +72,8 @@ def cart(request):
     context = {
         'shoes': Shoe.objects.all(),
         'cart_items': User_Order.objects.filter(owner_id=request.user.id),
+        'page_name': 'cart',
+        'class_css': 'gradient-custom',
     }
     for i in context['cart_items']:
         temp = ''

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        {% if page_name %}
+            <title>Shoezone - {{ page_name }}</title>
+        {% else %}
+            <title>Shoezone</title>
+        {% endif %}
+        <link rel="icon" type="image/x-icon" href="../../../media/shoes/Media/favicon.png">
+
+        {% block head %}{% endblock head %}
+    </head>
+
+    {% if class_css %}
+        <body class="{{class_css}}">
+    {% else %}
+        <body>  
+    {% endif %}
+            {% if nav %}
+                <header>
+                    <nav class="navbar navbar-expand-lg" style="background-color:#F1F1F1">
+                        <div class="container-fluid">
+                            <a class="navbar-brand" href="{% url 'shoes-home' %}"><span><img draggable="false" src="../../../media/shoes/Media/logo.png" class="logo" draggalbe="false"/></span></a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-	expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav ms-auto me-auto mb-1 mb-lg-10 justify-content-end">
+                                    <a href="{% url 'shoes-home' %}" style="text-decoration: none;" class="nav-link active item_menu" aria-current="page">
+                                        <li class="item nav-item menu_hover">Home</li>
+                                    </a>
+                                    <a href="{% url 'men' %}" style="text-decoration: none;" class="nav-link active item_menu" aria-current="page">
+                                        <li class="item nav-item menu_hover">Men</li>
+                                    </a>
+                                    <a href="{% url 'women' %}" style="text-decoration: none;" class="nav-link active item_menu" aria-current="page">
+                                        <li class="item nav-item menu_hover">Women</li>
+                                    </a>
+                                        <a href="{% url 'cart' %}" style="text-decoration: none;" class="nav-link active item_menu menu" aria-current="page" >
+                                            <li class="item nav-item menu_hover">Shopping Cart</li>
+                                        </a>
+                                    <li class="nav-item dropdown menu item">
+                                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: black">
+                                            Profile
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item dropmenu_hover" href="{% url 'login' %}" name="register">SignIn/SignUp</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <form class="d-flex input-group search" role="search" method=POST action="{% url 'search_shoes' %}">
+                                    {% csrf_token %}
+                                    <input class="form-control" type="search" placeholder="Search For a Brand" aria-label="Search" name="searched" />
+                                    <button class="btn btn-outline-primary" type="submit" >Search</button>
+                                </form>
+                            </div>
+                            <script>
+                                function myfunction(){
+                                    alert("Please Sign in :(");
+                                }
+                            </script>
+                            {% if user.is_authenticated %}
+                                <li class="nav-item ipad">
+                                    <a class="nav-link " href="{% url 'cart' %}">
+                                        <i class="material-icons" style="font-size:42px;margin:5px 0px 0px 23px;">shopping_cart</i>
+                                    </a>
+                                </li>
+                            {% else %}
+                                <li class="nav-item ipad">
+                                    <a class="nav-link " onclick="myfunction()" href="">
+                                        <i class="material-icons" style="font-size:42px;margin:5px 0px 0px 23px;">shopping_cart</i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            <li class="nav-item dropdown ipad" style="margin-top: -10px">
+                                <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-person-circle material-icons" style="font-size:38px; margin:0px 0px 0px 16px;"></i>
+                                </a>
+                                <ul class="dropdown-menu" style="margin:1.4vw 0vw 0vw -190%">
+                                    {% if user.is_authenticated %}
+                                        <li><a class="dropdown-item dropmenu_hover" href="{% url 'logout' %}" name="register">Logout</a></li>
+                                    {% else %}
+                                        <li><a class="dropdown-item dropmenu_hover" href="{% url 'login' %}" name="register">SignIn/SignUp</a></li>
+                                    {% endif %}
+                                </ul>
+                            </li>
+                        </div>
+                    </nav>
+                </header>
+            {% endif %}
+            
+            {% block content %}{% endblock content %}
+        </body>
+    
+    {% block additional %}
+    {% endblock additional %}
+    
+</html>
+
+<!--Three blocks:
+        - head
+        - content
+        - additional
+    Three condintionals:
+        - page_name
+        - class_css
+        - nav
+    
+    Done:
+        - home
+        - shopping cart
+        - search
+-->
