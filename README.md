@@ -2,28 +2,24 @@
 
 ## Creating a full website for "Shoezone"
 
-#### Course instructor:
+### Course instructor:
 
 ##### Dr. Essam Eliwa
 
-#### Contributors:
+### Contributors:
 
-##### - Abdelrahman Mohamed
+#### Front end:
 
-##### - Maeen Mohamed
-
-##### - Omar Alaa ElNahass
-
-##### - Omar Ashraf
-
-##### - Roaa Mohamed
-
-### Front end:
 ##### Abdelrahman Mohamed Barakat
+
 ##### Maeen Mohamed Sayed
-### Backend:
-##### Omar Alaa El Nahass (Team Leader)
+
+#### Backend:
+
+##### Omar Alaa El Nahass
+
 ##### Omar Ashraf Elsayed
+
 ##### Roaa Mohamed Aboul Fotouh
 
 This is a web application made for selling shoes for the shop "Shoezone" as a major task for our "Software Engineering" course.
@@ -35,4 +31,3 @@ The website contains the following pages:
 - Search Results
 - Login
 - Registeration
-- Admin
