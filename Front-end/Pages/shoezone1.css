@@ -5,6 +5,9 @@
 	text-decoration:none;
 	box-sizing: border-box;
 }
+main{
+	min-height: 87.1vh;
+}
 .logo{
 	float:left;
 	line-height:63px;/*was 80*/
@@ -58,7 +61,7 @@
 /*Products*/
 .flex{
 	display:flex;
-	justify-content: space-around;
+	justify-content: space-evenly;
 	flex-wrap: wrap;
 }
 .box{
@@ -92,7 +95,7 @@
 	width:100%;
 	height:200px;
 	display:flex;
-	justify-content: space-around;
+	justify-content: space-evenly;
 	background:#111;
 }
 .phone{
