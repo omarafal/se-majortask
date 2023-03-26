@@ -1,3 +1,7 @@
+body{
+    background-image: url("../Media/cart1.jpg") !important;
+	background-size:cover !important;
+}
 .gradient-custom {
 /* fallback for old browsers */
 background: #6a11cb;
