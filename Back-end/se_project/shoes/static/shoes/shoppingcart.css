@@ -12,6 +12,13 @@ body{
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
 }
+.anker{
+    border-radius: 5px;
+    background-color: #0071c5;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    color: white !important;
+}
 @media (max-width: 1400px) {
     p.text-start{
         width: 80px;
