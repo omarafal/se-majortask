@@ -24,18 +24,18 @@
                         <div class="card-header py-3">
                             {% if no_items == 1 %}
                                 <h5 class="mb-0">Cart - {{ no_items }} item</h5>
-                                {% if messages %}
-                                    {% for message in messages %}
-                                    {{ message }}
-                                    {% endfor %}
-                                {% endif %}
+{#                                {% if messages %}#}
+{#                                    {% for message in messages %}#}
+{#                                        {{ message }}#}
+{#                                    {% endfor %}#}
+{#                                {% endif %}#}
                             {% else %}
                                 <h5 class="mb-0">Cart - {{ no_items }} items</h5>
-                                {% if messages %}
-                                    {% for message in messages %}
-                                    {{ message }}
-                                    {% endfor %}
-                                {% endif %}
+{#                                {% if messages %}#}
+{#                                    {% for message in messages %}#}
+{#                                        {{ message }}#}
+{#                                    {% endfor %}#}
+{#                                {% endif %}#}
                             {% endif %}
                         </div>
                         <div class="card-body">
@@ -134,12 +134,12 @@
                                 </li>
                             </ul>
                             {% if cart_items %}
-                                <a href="{% url 'checkout' %}" name="checkout">
-                                    <button type="button" class="btn btn-primary btn-lg btn-block"  style="background:darkorange">
+                                <a href="{% url 'checkout' %}">
+                                    <button type="button" name="checkout" class="btn btn-primary btn-lg btn-block"  style="background:darkorange">
                                         Go to checkout
                                     </button>
                                 </a>
-                           {% else %} 
+                           {% else %}
                                 <a href="" name="checkout" onclick="myfunc()">
                                     <button type="button" class="btn btn-primary btn-lg btn-block"  style="background:darkorange">
                                         Go to checkout

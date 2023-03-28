@@ -57,11 +57,17 @@
                     </div>
                     <hr class="my-4" />
                     <div class="card mb-0">
-                        <div class="card-body">
-                            <strong><h2 style="text-align: center;">Thank You!</h2></strong>
-                            <div style="text-align: center;font-size: 50px;color: limegreen"><i class="fa-solid fa-circle-check"></i></div>
-                            <p style="text-align: center"><strong>Your order has been placed</strong></p>
-                            <p class="mb-0" style="text-align: center">Your order number is: #{{ order_no }}</p>
+                        <div class="card-body" style="display: inline-block">
+                            {% if not Error %}
+                                <strong><h2 style="text-align: center;">Thank You!</h2></strong>
+                                <div style="text-align: center;font-size: 50px;color: limegreen"><i class="fa-solid fa-circle-check"></i></div>
+                                <p style="text-align: center"><strong>Your order has been placed</strong></p>
+                                <p class="mb-0" style="text-align: center">Your order number is: #{{ order_no }}</p>
+                            {% else %}
+                                <strong><h2 style="text-align: center;">{{ Error }}</h2></strong>
+                                <div style="text-align: center;font-size: 50px;color: limegreen"><i class="fa-solid fa-circle-xmark" style="color: red"></i></div>
+                                <a href="{% url 'shoes-home' %}" class="anker"><h5 style="background-color: darkorange; text-align: center">Go To Home?</h5></a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
