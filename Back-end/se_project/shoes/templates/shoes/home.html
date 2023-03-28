@@ -63,43 +63,50 @@
     </div>
     <!--NEW PRODUCTS-->
     <div data-aos="zoom-in" data-aos-duration="600" data-aos-delay="0"><h1 style="text-align:center;margin:20px;">NEW PRODUCTS</h1></div>
-    <div class="flex">
-        {% for i in home_items %}
-            <div class="page-inner">
-                <div class="row">
-                    <div class="el-wrapper">
-                        <div class="box-up">
-                            <img class="img" src="../../../{{ i.img }}" alt="">
-                            <div class="img-info">
-                                <div class="info-inner">
-                                    <span class="p-name">{{ i.name }}</span>
-                                    <span class="p-company">{{ i.brand }}</span>
+    <div data-aos="fade-up" data-aos-delay="100">
+        <div class="flex">
+            {% for i in home_items %}
+                <div class="page-inner">
+                    <div class="row">
+                        <div class="el-wrapper">
+                            <div class="box-up">
+                                <img class="img" src="../../../{{ i.img }}" alt="">
+                                <div class="img-info">
+                                    <div class="info-inner">
+                                        <span class="p-name">{{ i.name }}</span>
+                                        <span class="p-company">{{ i.brand }}</span>
+                                    </div>
+                                    <div class="a-size">Available sizes : <span class="size">{{ i.size }}</span></div>
                                 </div>
-                                <div class="a-size">Available sizes : <span class="size">{{ i.size }}</span></div>
-                            </div>
-                        </div>
-
-                        <div class="box-down">
-                            <div class="h-bg">
-                                <div class="h-bg-inner"></div>
                             </div>
 
-                            <a class="cart" href="/item/{{ i.id }}">
-                                <span class="price">{{ i.price }}</span>
-                                <span class="add-to-cart">
-                                    <span class="txt">View Item</span>
-                                  </span>
-                            </a>
+                            <div class="box-down">
+                                <div class="h-bg">
+                                    <div class="h-bg-inner"></div>
+                                </div>
+
+                                <a class="cart" href="/item/{{ i.id }}">
+                                    <span class="price">{{ i.price }}</span>
+                                    <span class="add-to-cart">
+                                        <span class="txt">View Item</span>
+                                    </span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
+           
+            {% endfor %}
+        </div> 
     </div>
 {% endblock content %}
 
 {% block additional %}
     <script>
-        AOS.init();
+        AOS.init({
+            duration:800,
+		    offset:300,
+		    easing:'ease-out-back',
+        });
     </script>
 {% endblock additional %}

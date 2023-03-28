@@ -97,7 +97,11 @@
 {% endblock content %}
 
 {% block additional %}
-    <script>
-        AOS.init();
-    </script>
+<script>
+    AOS.init({
+        duration:800,
+        offset:300,
+        easing:'ease-out-back',
+    });
+</script>
 {% endblock additional %}

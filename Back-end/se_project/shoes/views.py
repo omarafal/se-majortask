@@ -37,7 +37,7 @@ def search_shoes(request):
         }
         return render(request, 'shoes/search_shoes.html', context)
     else:
-        return render(request, 'shoes/search_shoes.html')
+        return render(request, 'shoes/search_shoes.html', {'page_name': 'Search Results', 'nav': True})
 
 
 def item_page(request, myid):
@@ -105,13 +105,17 @@ def cart(request):
 
 def checkout(request):
     x = randint(10000, 99999)
-    for i in User_Order.objects.all():
-        i.delete()
-    context = {
-        'order_no': x,
-        'page_name': "Checkout"
-    }
-    return render(request, 'shoes/checkout.html', context)
+    if request.method == "POST":
+        for i in User_Order.objects.all():
+            i.delete()
+        context = {
+            'order_no': x,
+            'page_name': "Checkout"
+        }
+        return render(request, 'shoes/checkout.html', context)
+    else:
+        messages.error(request, "Please Fill Your Cart Then Checkout :(")
+        return redirect('cart')
 def add_To_Cart(request, xid):
     if User_Order.objects.filter(product_id=xid):
         check = User_Order.objects.get(product_id=xid)

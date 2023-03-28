@@ -24,8 +24,18 @@
                         <div class="card-header py-3">
                             {% if no_items == 1 %}
                                 <h5 class="mb-0">Cart - {{ no_items }} item</h5>
+                                {% if messages %}
+                                    {% for message in messages %}
+                                    {{ message }}
+                                    {% endfor %}
+                                {% endif %}
                             {% else %}
                                 <h5 class="mb-0">Cart - {{ no_items }} items</h5>
+                                {% if messages %}
+                                    {% for message in messages %}
+                                    {{ message }}
+                                    {% endfor %}
+                                {% endif %}
                             {% endif %}
                         </div>
                         <div class="card-body">
@@ -71,10 +81,8 @@
                                     </div>
                                 </div>
                                 <!-- Single item -->
-
                                 <hr class="my-4" />
                             {% endfor %}
-
                         </div>
                     </div>
                     <div class="card mb-4 mb-lg-0">
@@ -125,11 +133,24 @@
                                     {% endif %}
                                 </li>
                             </ul>
-                            <a href="{% url 'checkout' %}">
-                                <button type="button" class="btn btn-primary btn-lg btn-block">
-                                    Go to checkout
-                                </button>
-                            </a>
+                            {% if cart_items %}
+                                <a href="{% url 'checkout' %}" name="checkout">
+                                    <button type="button" class="btn btn-primary btn-lg btn-block"  style="background:darkorange">
+                                        Go to checkout
+                                    </button>
+                                </a>
+                           {% else %} 
+                                <a href="" name="checkout" onclick="myfunc()">
+                                    <button type="button" class="btn btn-primary btn-lg btn-block"  style="background:darkorange">
+                                        Go to checkout
+                                    </button>
+                                </a>
+                            {% endif %}
+                            <script>
+                                    function myfunc(){
+                                        alert("Your Cart Is Empty :(");
+                                    }
+                                </script>
                         </div>
                     </div>
                 </div>
