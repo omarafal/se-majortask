@@ -31,3 +31,5 @@ The website contains the following pages:
 - Search Results
 - Login
 - Registeration
+- Item's page
+- Shopping Cart
