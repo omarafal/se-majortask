@@ -8,6 +8,8 @@ urlpatterns = [
     path('', views.home, name='shoes-home'),
     path('men/', views.men, name='men'),
     path('women/', views.women, name='women'),
+    path('orders/', views.view_orders, name='orders_view'),
+    path('order_del/<int:num>', views.delete_order, name='order_del'),
     path('search_shoes/', views.search_shoes, name='search_shoes'),
     path('register/', views.registration, name='register'),
     path('login/', auth_views.LoginView.as_view(template_name='shoes/sign_in.html', extra_context={'page_name': 'Sign In'}), name='login'),
