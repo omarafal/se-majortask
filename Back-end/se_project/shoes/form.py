@@ -57,3 +57,12 @@ class Size(ModelForm):
         widgets = {
             'body': Textarea()
         }
+
+# class Profile(UserCreationForm):
+#     class Meta:
+#         model = Shoe
+#         fields = '__all__'
+#         exclude = ('author',)
+#         widgets = {
+#             'body': Textarea()
+#         }

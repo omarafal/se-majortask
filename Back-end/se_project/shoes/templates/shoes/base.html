@@ -87,7 +87,8 @@
                     <ul class="dropdown-menu" style="margin:1.4vw 0vw 0vw -190%">
                         {% if user.is_authenticated %}
                             <li><a class="dropdown-item dropmenu_hover" href="{% url 'logout' %}" name="register">Logout</a></li>
-                            <li><a class="dropdown-item dropmenu_hover" href="{% url 'orders_view' %}" name="register">View Orders</a></li>
+                            <li><a class="dropdown-item dropmenu_hover" href="{% url 'profile' %}" name="register">Edit Profile</a></li>
+                            <li><a class="dropdown-item dropmenu_hover" href="{% url 'password_change' %}" name="register">Change Your Password</a></li>
                         {% else %}
                             <li><a class="dropdown-item dropmenu_hover" href="{% url 'login' %}" name="register">SignIn/SignUp</a></li>
                         {% endif %}

@@ -32,6 +32,7 @@ class User_Order(models.Model):
     def __str__(self):
         return str("In Cart Product: {x}".format(x=self.product.name))
 
+
 class Orders(models.Model):
     user_ordered = models.CharField(max_length=50, default="")
     order_no = models.CharField(max_length=20, default="#000000")
@@ -40,3 +41,12 @@ class Orders(models.Model):
 
     def __str__(self):
         return str(self.order_no)
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    forget_password_token = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.user.username
