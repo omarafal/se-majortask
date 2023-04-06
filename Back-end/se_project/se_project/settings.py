@@ -26,6 +26,9 @@ SECRET_KEY = 'django-insecure-sb1daivcm0qr_4o#t*i&omwnk8-+m69$eeevs(4@i72lgmg1ml
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# if DEBUG:
+#     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 ALLOWED_HOSTS = []
 
 
@@ -126,3 +129,10 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'shoes-home'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'qubeteamofficial@gmail.com'
+EMAIL_HOST_PASSWORD = 'xqwolhfukvmiahfn'

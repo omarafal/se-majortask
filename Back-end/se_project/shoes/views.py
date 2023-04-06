@@ -1,16 +1,20 @@
 import datetime
-
+import uuid
 from django.shortcuts import render, redirect
+from django.views import generic
+from django.urls import reverse_lazy
 from .models import *
 from .form import *
 from random import randint, randrange
 from django.urls import reverse
 from django.http.response import JsonResponse
 from django.http import HttpResponseRedirect, Http404
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
+from django.contrib.auth.views import *
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
+from .helpers import send_forget_password_mail
 
 
 def get_referer(request):
@@ -18,6 +22,7 @@ def get_referer(request):
     if not referer:
         return None
     return referer
+
 
 def home(request):
     for i in Shoe.objects.all():
@@ -44,12 +49,14 @@ def view_orders(request):
     }
     return render(request, 'shoes/orders_page.html', context)
 
+
 def delete_order(request, num):
     if Orders.objects.filter(order_no=num):
         check = Orders.objects.get(order_no=num)
         check.delete()
         return redirect('/')
     return redirect('/')
+
 
 def search_shoes(request):
     if not get_referer(request):
@@ -154,7 +161,10 @@ def checkout(request):
             # i.delete()
         temp = ""
         for i in User_Order.objects.filter(owner=request.user, ordered=True):
-            temp += "Shoe Name: {x}\nShoe Brand: {q}\nSelected Sizes: {z}\nQuantity: {y}\n\n".format(x=i.product.name, q=i.product.brand, z=i.selected_size, y=i.product_qty)
+            temp += "Shoe Name: {x}\nShoe Brand: {q}\nSelected Sizes: {z}\nQuantity: {y}\n\n".format(x=i.product.name,
+                                                                                                     q=i.product.brand,
+                                                                                                     z=i.selected_size,
+                                                                                                     y=i.product_qty)
             i.delete()
         Orders.objects.create(order_no=x, items=temp)
         other = Orders.objects.get(order_no=x)
@@ -173,6 +183,8 @@ def checkout(request):
     return render(request, 'shoes/checkout.html', context)
     # messages.success(request, "Please Fill Your Cart Then Checkout :(")
     # return redirect('cart')
+
+
 def add_To_Cart(request, xid):
     if not get_referer(request):
         raise Http404
@@ -194,6 +206,7 @@ def add_To_Cart(request, xid):
         messages.success(request, "Please Select a Size")
         return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
+
 def remove_From_Cart(request, xid):
     if not get_referer(request):
         raise Http404
@@ -204,3 +217,39 @@ def remove_From_Cart(request, xid):
     messages.success(request, "Item Not in Cart")
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
+
+def profile(request):
+    msg = None
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, instance=request.user)
+        if User.objects.filter(username__contains=request.POST.get('username')):
+            if request.user.username == request.POST.get('username'):
+                pass
+            else:
+                messages.error(request, 'Username Already Exists :(')
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+        if request.POST.get('first_name').isnumeric() or request.POST.get('last_name').isnumeric():
+            messages.error(request, 'First/Last Name Can’t Be Entirely Numeric :(')
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+        if not request.POST.get('first_name') or not request.POST.get('last_name'):
+            messages.error(request, 'Do Not Leave First/Last Name Blank :(')
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+        else:
+            if form.is_valid():
+                form.save()
+            msg = 'Data has been saved'
+    form = ProfileForm(instance=request.user)
+    context = {
+        'user': request.user,
+        'class_css': 'p-0 m-0 border-0 bd-example',
+        'nav': True,
+        'form': form,
+        'msg': msg
+    }
+    return render(request, 'shoes/profile.html', context)
+
+
+class PasswordChange(PasswordChangeView):
+    @property
+    def success_url(self):
+        return reverse_lazy('login')

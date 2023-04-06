@@ -10,7 +10,7 @@ class Shoe(models.Model):
     name = models.CharField(max_length=100)
     brand = models.CharField(max_length=20, default="Nike")
     price = models.CharField(max_length=10, default="EGP 50")
-    size = models.CharField(max_length=50, default="40, 41, 42, 43, 44, 45")
+    size = models.CharField(max_length=50, default="38 - 45")
     color = models.CharField(max_length=50, default="White")
     color_hexa = models.CharField(max_length=50, default="#000000")
     Type = models.CharField(max_length=10, default="Men")
@@ -32,6 +32,7 @@ class User_Order(models.Model):
     def __str__(self):
         return str("In Cart Product: {x}".format(x=self.product.name))
 
+
 class Orders(models.Model):
     user_ordered = models.CharField(max_length=50, default="")
     order_no = models.CharField(max_length=20, default="#000000")
@@ -40,3 +41,10 @@ class Orders(models.Model):
 
     def __str__(self):
         return str(self.order_no)
+
+
+class Profile(models.Model):
+    users = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.users.username)

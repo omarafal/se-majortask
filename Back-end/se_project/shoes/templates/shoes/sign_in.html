@@ -39,7 +39,10 @@
 {#				<input id="password"name="password" type="password"/>#}
 			</div>
                 <div class="input-control" style="margin-top: 20px; display: block; text-align: center; ">
-                    <a href="{% url 'register' %}">Don't Have an Account?</a>
+                    <a href="{% url 'register' %}" style="color: black; text-decoration: none">Don't Have an Account?</a>
+                </div>
+                <div class="input-control" style="margin-top: 20px; display: block; text-align: center; ">
+                    <a href="{% url 'password_reset' %}" style="color: black; text-decoration: none">Forgot Your Password?</a>
                 </div>
                 <br>
            	 	<div class="input-control" style="text-align: center">
