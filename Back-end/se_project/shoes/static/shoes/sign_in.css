@@ -1,3 +1,9 @@
+
+ul.errorlist{
+	padding: 0px !important;
+	list-style-type: none !important;
+	color: #E4413B !important;
+}
 body {
 	background-image: url("../../../media/shoes/Media/shoe.jpg");
 	background-size:cover;
@@ -14,7 +20,6 @@ body {
 
 #form {
     width: 500px;
-	height:100%;
     margin-top: 15vh;
     padding: 20px;
     background-color: whitesmoke;

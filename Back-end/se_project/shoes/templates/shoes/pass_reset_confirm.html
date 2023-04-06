@@ -14,7 +14,7 @@
 {% block content %}
     <div class="container">
         <div class="form-group">
-            <form id="form" method="POST" style="height: 68%">
+            <form id="form" method="POST">
                 {% csrf_token %}
                 <h1>Enter New Password</h1>
                 <h3 style="text-align: center">
@@ -25,14 +25,11 @@
                         {% endfor %}
                     {% endif %}
                 </h3>
-                {% if form.errors %}
-                    <h3 style="text-align: center">Password Doesn't Match :(</h3>
-                {% endif %}
                 <div class="input-control">
                     <label class ="label" for="email">New Password</label>
                     {{ form.new_password1 }}
                 </div>
-                <div class="input-control">
+                <div class="input-control">![](../../../../../../../Downloads/jpeg-optimizer_man2.jpeg)![](../../../../../../../Downloads/jpeg-optimizer_man3.jpeg)![](../../../../../../../Downloads/jpeg-optimizer_man4.jpeg)![](../../../../../../../Downloads/jpeg-optimizer_man5.jpeg)![](../../../../../../../Downloads/jpeg-optimizer_man6.jpeg)![](../../../../../../../Downloads/jpeg-optimizer_man1.jpeg)
                     <ul>
                         <li>Your password can’t be too similar to your other personal information.</li>
                         <li>Your password must contain at least 8 characters.</li>
@@ -43,6 +40,9 @@
                 <div class="input-control">
                     <label class ="label" for="email">Confirm New Password</label>
                     {{ form.new_password2 }}
+                    {% if form.errors %}
+                        <h4 style="text-align: left; margin: -10px 0px 0px; padding-left: 8px">{{ form.errors.new_password2 }}</h4>
+                    {% endif %}
                 </div>
                 <div class="input-control" style="text-align: center">
                     <form action="#"><div><button id="button1" type="submit">Submit</button></div></form>

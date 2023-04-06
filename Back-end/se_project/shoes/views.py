@@ -219,15 +219,33 @@ def remove_From_Cart(request, xid):
 
 
 def profile(request):
+    msg = None
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, instance=request.user)
+        if User.objects.filter(username__contains=request.POST.get('username')):
+            if request.user.username == request.POST.get('username'):
+                pass
+            else:
+                messages.error(request, 'Username Already Exists :(')
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+        if request.POST.get('first_name').isnumeric() or request.POST.get('last_name').isnumeric():
+            messages.error(request, 'First/Last Name Can’t Be Entirely Numeric :(')
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+        if not request.POST.get('first_name') or not request.POST.get('last_name'):
+            messages.error(request, 'Do Not Leave First/Last Name Blank :(')
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+        else:
+            if form.is_valid():
+                form.save()
+            msg = 'Data has been saved'
+    form = ProfileForm(instance=request.user)
     context = {
         'user': request.user,
         'class_css': 'p-0 m-0 border-0 bd-example',
-        'nav': True
+        'nav': True,
+        'form': form,
+        'msg': msg
     }
-    if request.POST.get("password"):
-        request.user.password = request.POST.get("password")
-    else:
-        pass
     return render(request, 'shoes/profile.html', context)
 
 
