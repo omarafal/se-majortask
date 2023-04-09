@@ -62,6 +62,21 @@ def search_shoes(request):
     if not get_referer(request):
         raise Http404
     searched = request.POST['searched']
+    searched = str(searched).replace(" ", "")
+    searched = searched.lower()
+    if searched.__contains__("nike"):
+        searched = "Nike"
+    elif searched.__contains__("adidas"):
+        searched = "Adidas"
+    elif searched.__contains__("balenciaga"):
+        searched = "Balenciaga"
+    elif searched.__contains__("newbalance") or searched.__contains__("new balance"):
+        searched = "New Balance"
+    elif searched.__contains__("converse"):
+        searched = "Converse"
+    # for i in range(x):
+    #     if searched[i:i + 3] == "nike":
+    #         searched = "Nike"
     shoes_brands = Shoe.objects.filter(brand__contains=searched)
     context = {
         'searched': searched,
