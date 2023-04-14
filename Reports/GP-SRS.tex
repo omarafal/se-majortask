@@ -7,6 +7,7 @@
 \usepackage{mathptmx}
 \usepackage[normalem]{ulem}
 
+
 \renewcommand\theadalign{bc}
 \renewcommand\theadfont{\bfseries}
 \renewcommand\theadgape{\Gape[4pt]}
@@ -25,6 +26,12 @@ citestyle=ieee
 \title{Software Requirement Specification Document for CSE334 Course Project}
 \author{
 Supervised by: Dr. Essam Eliwa, Eng. Omar Magdy
+}
+\usepackage{hyperref}
+\hypersetup{
+colorlinks=true,
+linkcolor=black,
+urlcolor=blue,
 }
 
 \begin{document}
@@ -45,9 +52,16 @@ Supervised by: Dr. Essam Eliwa, Eng. Omar Magdy
 
 \begin{table}[htp]
 \begin{tabular}{cc}
-\thead{Project:}    & {Shoezone Store Website}   
+\thead{Project:}    & {Shoezone Store Website}  
 \end{tabular}
 \end{table}
+
+\begin{table}[htp]
+\begin{tabular}{cc}
+\thead{GitHub:}  \url{http://github.com/omarafal/se-majortask.git}
+\end{tabular}
+\end{table}
+
 
 \pagebreak
 \tableofcontents
@@ -108,21 +122,32 @@ The website is built to:
 \end{itemize}
 
 \subsection{ User Characteristics}
-
-
+\begin{itemize}
+\item Customers are not expected to comprehend a lot about computers; the only skill needed is to be capable of using computer software.
+\item It is required from the admins to have minimum knowledge of database handling, as we are using Django, which already provides a user interface. 
+\end{itemize}
 
 \pagebreak 
 \section{Functional Requirements}
 \subsection{System Functions}\label{System Functions}
 \subsubsection{Admin}
+The admin should be able to:
 \begin{itemize}
-\item Have the ability to update the database
-\item Can keep track of clients orders status
+\item Have the ability to update the database.
+\item Can keep track of clients orders status.
 \end{itemize}
 \subsubsection{Client}
-
+The Customer should be able to:
+\begin{itemize}
+\item Can sign up to creat an account.
+\item Can directly sign in, if he/she already had created an account.
+\item View shoes and available sizes.
+\item Search for shoes.
+\item Add and remove from the cart.
+\item Place an order, and know the estimated delivery time.
+\end{itemize}
 \section{Design Constraints}
-100 word Limit.
+Shoezone website helps store customers view and order any shoes they want from their homes through a user-friendly website, thus they do not need to be physically in the store 
 
 \subsection{ Standards Compliance}
 
@@ -141,7 +166,15 @@ The website is built to:
 
 
 \section{Operational Scenarios}
+Initial Assumption: 
+Normal: The customer views the shoes on the website if the customer decides to order any of the shoes; It will require him to sign up if it is his first time using the website or sign in using his account if the customer has one. Subsequently, he will add any shoes he wants to the cart to checkout and place the order.
+What can go wrong:
 
+\begin{itemize}
+\item The user sign up with an existing email
+\item The user enters a wrong password, while signing in
+\end{itemize}
+System state on completion: The user should be capable of viewing and searching for shoes before signing up or signing in if the user wanted to place an order then he/she should sign up or sign in 
 \section{Project Plan}
 
 
