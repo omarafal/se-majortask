@@ -19,7 +19,7 @@ class Shoe(models.Model):
         return self.name
 
 
-class User_Order(models.Model):
+class Cart_item(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Shoe, on_delete=models.CASCADE)
     product_qty = models.IntegerField(null=False, blank=False)
