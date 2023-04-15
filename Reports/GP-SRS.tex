@@ -6,8 +6,8 @@
 \usepackage[T1]{fontenc}
 \usepackage{mathptmx}
 \usepackage[normalem]{ulem}
-\usepackage{csquotes}
-\graphicspath{ {./media/} }
+
+
 \renewcommand\theadalign{bc}
 \renewcommand\theadfont{\bfseries}
 \renewcommand\theadgape{\Gape[4pt]}
@@ -25,7 +25,6 @@ citestyle=ieee
 %opening
 \title{Software Requirement Specification Document for CSE334 Course Project}
 \author{
-Abdelrahman Mohamed, Maeen Mohamed, Omar El Nahass, Omar Ashraf, Roaa Mohamed
 Supervised by: Dr. Essam Eliwa, Eng. Omar Magdy
 }
 \usepackage{hyperref}
@@ -34,6 +33,7 @@ colorlinks=true,
 linkcolor=black,
 urlcolor=blue,
 }
+\graphicspath{ {./images/} }
 
 \begin{document}
 \maketitle
@@ -68,25 +68,20 @@ urlcolor=blue,
 \tableofcontents
 \pagebreak
 \begin{abstract}
-In the last few years, online shopping has become an integral part of our daily lives especially after the COVID-19 pandemic. Obtaining a web application is almost mandatory for any shop that aims to reach a wider range of audiences. Our Project is aimed to create a full website for a small business selling different types of shoes (men and women) that has a sleek modern design with user-friendly options. We plan to apply an incremental development process as we want to involve the customer as much as possible and regularly update the application based on said customer's changing requirements.
-With a team of sophomore students boasting extensive knowledge in the field, we are well-placed to help our clients grow and thrive - even in challenging times. By really getting to know our customers, our talented team can offer unique and customized solutions backed by data-driven analysis and broad research.
-As a team, we believe in building long-lasting client partnerships which help us all grow. Our main goal is to create unique websites that attract a bunch of users from all over the world.
+Project abstract 
+Our Project is to create a full website about a small business selling different types of shoes (Men and Women), we will create a very special layout for the website. 
+Qube Team is a leading provider of websites for online store businesses. With a team of sophomore students boasting extensive knowledge in the field, we are well-placed to help our clients grow and thrive - even in challenging times. By really getting to know our customers, our talented team can offer unique and customized solutions backed by data-driven analysis and broad research. 
+As a team, we believe in building long-lasting client partnerships which help us all grow. Our main goal is to create unique websites that attract a bunch of users from all over the world. 
 
 \end{abstract}
 
 
 \section{Introduction}
 \subsection{Purpose of this document}
-The Software Requirement Specification Document (SRS) of this project is to overview and outline the requirements of the Shoezone Website. The intended audiences of the external stakeholder type are Dr. Essam Eliwa, Eng. Omar Magdy and the website's owner while of the internal stakeholder type are the end-users. Shoezone Website eases ordering for all Shoezone store clients of different ages and knowledge about websites; The website allows the user to order using any internet browser as the website will account for the different browsers the users might use to access the website.
+The Software Requirement Specification Document (SRS) is to overview and outline the requirements of the Shoezone Website. The intended audiences are Dr. Essam Eliwa and Eng. Omar Magdy. Shoezone Website eases ordering for all Shoezone store clients of different ages and knowledge about websites; The website displays the available shoes in the store and allows the user to order using any internet browser as the website will adjust to the screen according to its size.
 \subsection{Scope of this document}
-The SRS document of this project shall include the following
-\begin{itemize}
-\item Already delivered: front-end, proposal document.
-\item Yet to be delivered: back-end, testing document, and SSD document.
-\item A guideline for the project's expected schedule.
-\item A list of functional and non-functional requirements.
-\end{itemize}
-
+The website helps Shoezone store clients buy whatever they want without the need to tire themselves to buy it from the store. The website is for Shoezone store owner Abdelrahman Gamal, and it is for the use of all store clients.
+We already submitted the proposal document and the front-end,and we intend to finish the project during the next month, where the final deliverables are back-end, testing document, and SSD document. 
 
 
 %\subsection{Business Context}
@@ -95,35 +90,10 @@ The SRS document of this project shall include the following
 
 \section{Similar Systems}
 \subsection{Academic}
-% Two related paper with references
+\cite{majid2015adaptation}
 
 \subsection{Business Applications}
-Similar business applications:
-\begin{itemize}
-
-\item
-Charles and Keith: A store that sells multiple products including shoes.
- \begin{figure}[h]
-\centering
-\includegraphics[width=0.8\linewidth]{chK.png}
-\caption{Charles and Keith's website}
-\end{figure}
-\end{itemize}
-\newpage
-\begin{itemize}
-\item 
-Adidas: A famous brand that sells different types of shoes.
- \begin{figure}[h]
-\centering
-\includegraphics[width=0.8\linewidth]{adidas.png}
-\caption{Adidas' website}
-\label{fig:woocommerce}
-\end{figure}
-
- 
-
-\end{itemize}
-
+%Include a maximum of Two similar business applications with references.  (if applicable).
 \section{System Description}
 
 \subsection{Problem Statement}
@@ -144,7 +114,9 @@ The website is built to:
  \item Maintains the clients' information to allow them to order again by logging into their accounts, so they will not need to fill in their information again.
 \end{itemize}
 \subsection{System Context}
-
+\begin{figure}[h]
+\includegraphics{context.png}
+\end{figure}
 \subsection{Objectives}
 \begin{itemize}
  \item Designing a user-friendly website with a fast response time.
@@ -216,5 +188,9 @@ System state on completion: The user should be capable of viewing and searching 
 
 \printbibliography
 Note that you should use a minimum of ten references (80\% Academic)
+ 
+
+\bibliographystyle{plain}
+
 \end{document}
 
