@@ -1,20 +1,16 @@
+from django.shortcuts import render, redirect, get_object_or_404
 import datetime
-import uuid
-from django.shortcuts import render, redirect
-from django.views import generic
-from django.urls import reverse_lazy
 from .models import *
 from .form import *
 from random import randint, randrange
 from django.urls import reverse
 from django.http.response import JsonResponse
-from django.http import HttpResponseRedirect, Http404
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from django.contrib.auth.views import *
+from django.http import HttpResponseRedirect, Http404
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
-from .helpers import send_forget_password_mail
 
 
 def get_referer(request):
@@ -25,13 +21,19 @@ def get_referer(request):
 
 
 def home(request):
-    for i in Shoe.objects.all():
-        i.size = "38-45"
-        i.save()
     x = [None for i in range(4)]
-    temp = [2, 9, 17, 36]
+    count = int(Shoe.objects.count())
+    arr = [1 for i in range(count)]
+    for i in range(1, count):
+        arr[i] = arr[i - 1] + 1
+    y = 0
+    for i in Shoe.objects.all():
+        i.shoe_num = arr[y]
+        i.save()
+        y += 1
+    temp = [count - 3, count - 2, count - 1, count]
     for i in range(4):
-        x[i] = Shoe.objects.get(id=temp[i])
+        x[i] = Shoe.objects.get(shoe_num=temp[i])
     context = {
         'shoes': Shoe.objects.all(),
         'home_items': x,
@@ -39,23 +41,6 @@ def home(request):
         'nav': True
     }
     return render(request, 'shoes/home.html', context)
-
-
-def view_orders(request):
-    context = {
-        'orders': Orders.objects.all(),
-        'class_css': 'p-0 m-0 border-0 bd-example',
-        'nav': True
-    }
-    return render(request, 'shoes/orders_page.html', context)
-
-
-def delete_order(request, num):
-    if Orders.objects.filter(order_no=num):
-        check = Orders.objects.get(order_no=num)
-        check.delete()
-        return redirect('/')
-    return redirect('/')
 
 
 def search_shoes(request):
@@ -74,9 +59,6 @@ def search_shoes(request):
         searched = "New Balance"
     elif searched.__contains__("converse"):
         searched = "Converse"
-    # for i in range(x):
-    #     if searched[i:i + 3] == "nike":
-    #         searched = "Nike"
     shoes_brands = Shoe.objects.filter(brand__contains=searched)
     context = {
         'searched': searched,
@@ -90,12 +72,10 @@ def search_shoes(request):
 def item_page(request, myid):
     if not get_referer(request):
         raise Http404
-    form = Size(request.POST)
     context = {
         'shoes': Shoe.objects.filter(id=myid),
         'page_name': 'Item Page',
-        'nav': True,
-        'form': form
+        'nav': True
     }
     y = []
     x = []
@@ -171,9 +151,16 @@ def cart(request):
                 if j.isnumeric():
                     temp += j
             total_price += int(temp) * i.product_qty
+    price = str(total_price)
+    if 1000 <= total_price <= 9999:
+        price = "{x},{y}".format(x=price[0], y=price[1:])
+    elif 9999 < total_price <= 99999:
+        price = "{x},{y}".format(x=price[0:2], y=price[2:])
+    elif total_price > 99999:
+        price = "{x},{y}".format(x=price[0:3], y=price[3:])
     total_items = context['cart_items'].count()
     context['no_items'] = int(total_items)
-    context['total_price'] = total_price
+    context['total_price'] = price
     return render(request, 'shoes/shoppingcart.html', context)
 
 
@@ -193,7 +180,13 @@ def checkout(request):
                 if j.isnumeric():
                     temp_p += j
             total_price += int(temp_p) * i.product_qty
-            # i.delete()
+        price = str(total_price)
+        if 1000 <= total_price <= 9999:
+            price = "{x},{y}".format(x=price[0], y=price[1:])
+        elif 9999 < total_price <= 99999:
+            price = "{x},{y}".format(x=price[0:2], y=price[2:])
+        elif total_price > 99999:
+            price = "{x},{y}".format(x=price[0:3], y=price[3:])
         temp = ""
         for i in User_Order.objects.filter(owner=request.user, ordered=True):
             temp += "Shoe Name: {x}\nShoe Brand: {q}\nSelected Sizes: {z}\nQuantity: {y}\n\n".format(x=i.product.name,
@@ -201,10 +194,10 @@ def checkout(request):
                                                                                                      z=i.selected_size,
                                                                                                      y=i.product_qty)
             i.delete()
-        Orders.objects.create(order_no=x, items=temp)
-        other = Orders.objects.get(order_no=x)
+        Order.objects.create(order_no="#{z}".format(z=x), items=temp)
+        other = Order.objects.get(order_no="#{h}".format(h=x))
         other.user_ordered = "{x} {y}".format(x=str(request.user.first_name), y=str(request.user.last_name))
-        other.total_price = str(total_price)
+        other.total_price = "EGP " + price
         other.save()
         context = {
             'page_name': "Checkout",
@@ -216,8 +209,6 @@ def checkout(request):
             'Error': "Stop Refreshing :("
         }
     return render(request, 'shoes/checkout.html', context)
-    # messages.success(request, "Please Fill Your Cart Then Checkout :(")
-    # return redirect('cart')
 
 
 def add_To_Cart(request, xid):
@@ -253,6 +244,28 @@ def remove_From_Cart(request, xid):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
+def remove_quantity(request, xid):
+    if not get_referer(request):
+        raise Http404
+    temp = User_Order.objects.get(product_id=xid, owner=request.user)
+    if User_Order.objects.filter(product_id=xid, owner=request.user) and temp.selected_size.__contains__(','):
+        check = User_Order.objects.get(product_id=xid, owner=request.user)
+        check.product_qty -= 1
+        i = len(check.selected_size) - 1
+        x = str(check.selected_size)[:i-3]
+        check.selected_size = x
+        check.save()
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+    elif not temp.selected_size.__contains__(','):
+        remove_From_Cart(request, temp.product_id)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+class PasswordChange(PasswordChangeView):
+    @property
+    def success_url(self):
+        return reverse_lazy('login')
+
+
 def profile(request):
     msg = None
     if request.method == 'POST':
@@ -272,7 +285,7 @@ def profile(request):
         else:
             if form.is_valid():
                 form.save()
-            msg = 'Data has been saved'
+                msg = 'Data has been saved'
     form = ProfileForm(instance=request.user)
     context = {
         'user': request.user,
@@ -282,9 +295,3 @@ def profile(request):
         'msg': msg
     }
     return render(request, 'shoes/profile.html', context)
-
-
-class PasswordChange(PasswordChangeView):
-    @property
-    def success_url(self):
-        return reverse_lazy('login')

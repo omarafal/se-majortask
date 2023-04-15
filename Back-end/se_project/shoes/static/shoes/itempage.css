@@ -1,6 +1,9 @@
 .shadow1{
   box-shadow:10px 10px 25px  #888888;
 }
+main{
+	min-height: 88vh;
+}
 body {
   background-color: whitesmoke;
   height: 100vh;
@@ -30,7 +33,6 @@ h5 {
 ul {
   list-style: none;
   display: inline-flex;
-  margin: 0 !important;
   padding: 0;
 }
 
