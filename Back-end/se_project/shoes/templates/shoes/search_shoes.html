@@ -17,13 +17,13 @@
             <h1 align="center"> You Searched For {{ searched }}</h1>
         <br/>
         {% if shoes_brands %}
-            <div class="flex">
+            <div class="container page-wrapper" data-aos="fade-up" data-aos-delay="100">
             {% for i in shoes_brands %}
             <div class="page-inner">
                 <div class="row">
                     <div class="el-wrapper">
                         <div class="box-up">
-                            <img class="img" src="../../../{{ i.img }}" alt="">
+                            <img class="img" src="/{{ i.img }}" alt="">
                             <div class="img-info">
                                 <div class="info-inner">
                                     <span class="p-name">{{ i.name }}</span>
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                 </div>
-            </div>            
+            </div>
             {% endfor %}
             </div>
         {% else %}
@@ -58,5 +58,14 @@
         <h1 align="center"> Please Enter The Brand in Search Box</h1>
     {% endif %}
 </main>
+    <script>
+      if (history.scrollRestoration) {
+        history.scrollRestoration = 'manual';
+        }
+    else {
+        window.onbeforeunload = function () {
+            window.scrollTo(0, 0);
+        }
+    }
+    </script>
 {% endblock content %}
- 

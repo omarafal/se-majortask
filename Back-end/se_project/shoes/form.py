@@ -1,6 +1,4 @@
 from django import forms
-from .models import *
-from django.forms import ModelForm, Textarea
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 
@@ -37,6 +35,7 @@ class RegistrationForm(UserCreationForm):
             'class': 'form-control',
             'placeholder': 'Confirm Your Password'
         })
+
     first_name = forms.CharField(max_length=20)
     last_name = forms.CharField(max_length=20)
     username = forms.CharField(max_length=20)
@@ -48,15 +47,6 @@ class RegistrationForm(UserCreationForm):
         model = User
         fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2']
 
-
-class Size(ModelForm):
-    class Meta:
-        model = Shoe
-        fields = '__all__'
-        exclude = ('author',)
-        widgets = {
-            'body': Textarea()
-        }
 
 class ProfileForm(UserChangeForm):
     class Meta:

@@ -65,7 +65,7 @@
                             <div class="row">
                                 <div class="el-wrapper">
                                     <div class="box-up">
-                                        <img class="img" src="../../../{{ i.img }}" alt="">
+                                        <img class="img" src="/{{ i.img }}" alt="">
                                         <div class="img-info">
                                             <div class="info-inner">
                                                 <span class="p-name">{{ i.name }}</span>
@@ -97,11 +97,21 @@
 {% endblock content %}
 
 {% block additional %}
-<script>
-    AOS.init({
-        duration:800,
-        offset:300,
-        easing:'ease-out-back',
-    });
-</script>
+    <script>
+        AOS.init({
+            duration:800,
+            offset:300,
+            easing:'ease-out-back',
+        });
+    </script>
+    <script>
+      if (history.scrollRestoration) {
+        history.scrollRestoration = 'manual';
+        }
+    else {
+        window.onbeforeunload = function () {
+            window.scrollTo(0, 0);
+        }
+    }
+    </script>
 {% endblock additional %}

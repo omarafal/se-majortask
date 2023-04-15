@@ -7,6 +7,4 @@ from django.contrib.auth import get_user_model
 
 admin.site.register(Shoe)
 admin.site.register(User_Order)
-admin.site.register(Orders)
-admin.site.register(Profile)
-
+admin.site.register(Order)

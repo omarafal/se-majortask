@@ -4,8 +4,7 @@
 	<meta charset="UTF-8">
 	<link href="https://fonts.googleapis.com/css?family=Oswald:400,600" rel="stylesheet">
 	<link href="{% static 'shoes/itempage.css' %}" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="{% static 'shoes/home.css' %}"/>
-	<link rel="icon" type="image/x-icon" href="../../../media/shoes/Media/favicon.png">
+	<link rel="stylesheet" href="{% static 'shoes/home.css' %}"/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"><!--Google Icons-->
@@ -16,12 +15,12 @@
 {% endblock head %}
 
 {% block content %}
-
+<main>
     <div>
         {% for i in shoes %}
             <div class="container" style="margin-top:60px">
               <div class="product-image ">
-                  <img src="../../../{{ i.img }}" alt="" class="product-pic">
+                  <img src="/{{ i.img }}" alt="" class="product-pic">
                   <div class="dots">
                 </div>
               </div>
@@ -34,16 +33,10 @@
                     <span class="current">{{ i.price }}</span>
                   </div>
                 </header>
-            {#    <div class="controls" >#}
-            {#      <div class="size">#}
-            {#        <h5>size</h5>#}
-            {#          <h6>{{ i.size }}</h6>#}
-            {#      </div>#}
-            {#    </div>#}
-                      <div class="color" style="margin-top: 60px">
+                  <div class="color" style="margin-top: 60px">
                               {% if more_items %}
                                   <h5>select color:</h5>
-                                  <ul>
+                                  <ul style="margin: 0px">
                                   {% for j in more_items %}
                                       {% for x in more_items_id %}
                                           {% if j.id == x %}
@@ -57,8 +50,8 @@
                                   {% endfor %}
                                   </ul>
                               {% else %}
-                                  <h5>Available color is:</h5>
-                                  <ul>
+                                  <h5>Available color:</h5>
+                                  <ul style="margin: 0px">
                                   {% if i.color_hexa != "#000000" %}
                                       <li class="colors color-bdot1 active" style="margin: 20px 0px 20px -17px; background-color: {{ i.color_hexa }};box-shadow: 0 0 4px 0px black, 0 0 1px 5px white, 0 0 10px 5px black"></li>
                                   {% else %}
@@ -91,13 +84,10 @@
                       </script>
                       <div class="footer1" style="margin-top: 50px" >
                           {% if user.is_authenticated %}
-{#                              {% csrf_token %}#}
-{#                              <a href="/add_product/{{ i.id }}" style="text-decoration: none; display: inline">#}
                                   <button type="submit">
                                       <img src="http://co0kie.github.io/codepen/nike-product-page/cart.png" alt="">
                                       <span>add to cart</span>
                                   </button>
-{#                              </a>#}
                           {% else %}
                                   <button type="button" onclick="myfunction()">
                                       <img src="http://co0kie.github.io/codepen/nike-product-page/cart.png" alt="">
@@ -116,4 +106,5 @@
             </div>
         {% endfor %}
     </div>
+</main>
 {% endblock content %}

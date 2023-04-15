@@ -2,8 +2,8 @@
 {% load static %}
 {% block head %}
     <meta charset="utf-8">
+{#    <link rel="stylesheet" href="/ShoeZone/static/CSS/home.css"/>#}
     <link rel="stylesheet" href="{% static 'shoes/home.css' %}"/>
-    <link rel="icon" type="image/x-icon" href="../../../media/shoes/Media/favicon.png">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"><!--Google Icons-->
@@ -70,7 +70,7 @@
                     <div class="row">
                         <div class="el-wrapper">
                             <div class="box-up">
-                                <img class="img" src="../../../{{ i.img }}" alt="">
+                                <img class="img" src="{{ i.img }}" alt="">
                                 <div class="img-info">
                                     <div class="info-inner">
                                         <span class="p-name">{{ i.name }}</span>
@@ -95,8 +95,9 @@
                         </div>
                     </div>
                 </div>
+
             {% endfor %}
-        </div> 
+        </div>
     </div>
 {% endblock content %}
 
@@ -108,4 +109,15 @@
 		    easing:'ease-out-back',
         });
     </script>
+    <script>
+      if (history.scrollRestoration) {
+        history.scrollRestoration = 'manual';
+        }
+    else {
+        window.onbeforeunload = function () {
+            window.scrollTo(0, 0);
+        }
+    }
+    </script>
+
 {% endblock additional %}

@@ -13,8 +13,7 @@
 
 {% block content %}
     <div class="container">
-        <div class="form-group">
-            <form id="form" method="POST">
+            <form id="form" method="POST" style="height: 68%">
                 {% csrf_token %}
                 <h1>Enter New Password</h1>
                 <h3 style="text-align: center">
@@ -29,7 +28,7 @@
                     <label class ="label" for="email">New Password</label>
                     {{ form.new_password1 }}
                 </div>
-                <div class="input-control">![](../../../../../../../Downloads/jpeg-optimizer_man2.jpeg)![](../../../../../../../Downloads/jpeg-optimizer_man3.jpeg)![](../../../../../../../Downloads/jpeg-optimizer_man4.jpeg)![](../../../../../../../Downloads/jpeg-optimizer_man5.jpeg)![](../../../../../../../Downloads/jpeg-optimizer_man6.jpeg)![](../../../../../../../Downloads/jpeg-optimizer_man1.jpeg)
+                <div class="input-control">
                     <ul>
                         <li>Your password can’t be too similar to your other personal information.</li>
                         <li>Your password must contain at least 8 characters.</li>
@@ -48,6 +47,5 @@
                     <form action="#"><div><button id="button1" type="submit">Submit</button></div></form>
                 </div>
             </form>
-        </div>
     </div>
 {% endblock content %}

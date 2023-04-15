@@ -74,11 +74,11 @@ body {
     -ms-transform: translateY(-50%);
     -o-transform: translateY(-50%);
     transform: translateY(-50%);
-    color: #818181;
+    color: darkorange;
 }
 
 .el-wrapper:hover .add-to-cart {
-    left: 50%;
+    left: 55%;
 }
 
 .el-wrapper:hover .img {

@@ -19,22 +19,9 @@
             <a href="{% url 'shoes-home' %}"><button class="btn" style="max-width: 125px" type="button">← Back To Home</button></a>
             {% csrf_token %}
             <h1 style="margin: 10px 0px">Sign Up</h1>
-{#                {% if form.error_messages %}#}
-{#                    <h4 style="text-align: center; margin: -10px 0px 0px; padding-left: 8px">{{ form.error_messages }}</h4>#}
-{#                {% endif %}#}
                 {% for i in errors %}
                     <h4 style="text-align: center; margin: 0px 0px 0px; padding-left: 8px">{{ i }}</h4>
                 {% endfor %}
-{#                {% if form.email.errors %}#}
-{#                    <h4 style="text-align: center; margin: -10px 0px 0px; padding-left: 8px">{{ form.email.errors }}</h4>#}
-{#                {% endif %}#}
-{#                    {% if form.password1.errors %}#}
-{#                        <h4 style="text-align: center; margin: -10px 0px 0px; padding-left: 8px">{{ form.password1.errors }}</h4>#}
-{#                    {% endif %}#}
-{#                    {% if form.password2.errors %}#}
-{#                        <h4 style="text-align: center; margin: -10px 0px 0px; padding-left: 8px">{{ form.password2.errors }}</h4>#}
-{#                    {% endif %}#}
-{#                {% endif %}#}
             <div class="input-control">
                 <label class="label" for="first_name">First Name</label>
                 {{ form.first_name }}
@@ -62,12 +49,12 @@
                     <li>Your password can’t be a commonly used password.</li>
                     <li>Your password can’t be entirely numeric.</li>
                 </ul>
-            </div>
+             </div>
             <div class="input-control">
                 <label class="label" for="password2">Confirm Password</label>
                 {{ form.password2 }}
             </div>
-            <div class="input-control" style="margin: 20px 0px; display: block; text-align: center; ">
+             <div class="input-control" style="margin: 20px 0px; display: block; text-align: center; ">
                 <a href="{% url 'login' %}" style="color: black; text-decoration: none">Already Have an Account?</a>
             </div>
             <button type="submit" class="submit"> Sign Up</button>
