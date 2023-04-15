@@ -140,7 +140,7 @@ def cart(request):
     total_price = 0
     context = {
         'shoes': Shoe.objects.all(),
-        'cart_items': User_Order.objects.filter(owner_id=request.user.id, ordered=False),
+        'cart_items': Cart_item.objects.filter(owner_id=request.user.id, ordered=False),
         'page_name': 'Cart',
         'nav': False
     }
@@ -168,9 +168,9 @@ def checkout(request):
     if not get_referer(request):
         raise Http404
     total_price = 0
-    if User_Order.objects.filter(ordered=False, owner=request.user):
+    if Cart_item.objects.filter(ordered=False, owner=request.user):
         x = randint(100000, 999999)
-        for i in User_Order.objects.filter(owner=request.user, ordered=False):
+        for i in Cart_item.objects.filter(owner=request.user, ordered=False):
             i.ordered = True
             i.created_at = datetime.datetime.now()
             i.order_num = "#{h}".format(h=x)
@@ -188,9 +188,10 @@ def checkout(request):
         elif total_price > 99999:
             price = "{x},{y}".format(x=price[0:3], y=price[3:])
         temp = ""
-        for i in User_Order.objects.filter(owner=request.user, ordered=True):
-            temp += "Shoe Name: {x}\nShoe Brand: {q}\nSelected Sizes: {z}\nQuantity: {y}\n\n".format(x=i.product.name,
+        for i in Cart_item.objects.filter(owner=request.user, ordered=True):
+            temp += "Shoe Name: {x}\nShoe Brand: {q}\nSelected Color: {w}\nSelected Sizes: {z}\nQuantity: {y}\n\n".format(x=i.product.name,
                                                                                                      q=i.product.brand,
+                                                                                                     w=i.product.color,
                                                                                                      z=i.selected_size,
                                                                                                      y=i.product_qty)
             i.delete()
@@ -215,16 +216,16 @@ def add_To_Cart(request, xid):
     if not get_referer(request):
         raise Http404
     if request.POST.get("sizeselect"):
-        if User_Order.objects.filter(product_id=xid, ordered=False, owner=request.user):
-            check = User_Order.objects.get(product_id=xid, owner=request.user)
+        if Cart_item.objects.filter(product_id=xid, ordered=False, owner=request.user):
+            check = Cart_item.objects.get(product_id=xid, owner=request.user)
             check.selected_size += ", {y}".format(y=request.POST.get("sizeselect"))
             check.product_qty += 1
             check.save()
             messages.success(request, "Item Already in Cart")
             return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
-        User_Order.objects.create(owner=request.user, product_id=xid, product_qty=1)
+        Cart_item.objects.create(owner=request.user, product_id=xid, product_qty=1)
         messages.success(request, "Item Added To Cart")
-        hh = User_Order.objects.get(owner=request.user, product_id=xid)
+        hh = Cart_item.objects.get(owner=request.user, product_id=xid)
         hh.selected_size = request.POST.get("sizeselect")
         hh.save()
         return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
@@ -236,8 +237,8 @@ def add_To_Cart(request, xid):
 def remove_From_Cart(request, xid):
     if not get_referer(request):
         raise Http404
-    if User_Order.objects.filter(product_id=xid, owner=request.user):
-        check = User_Order.objects.get(product_id=xid, owner=request.user)
+    if Cart_item.objects.filter(product_id=xid, owner=request.user):
+        check = Cart_item.objects.get(product_id=xid, owner=request.user)
         check.delete()
         return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
     messages.success(request, "Item Not in Cart")
@@ -247,9 +248,9 @@ def remove_From_Cart(request, xid):
 def remove_quantity(request, xid):
     if not get_referer(request):
         raise Http404
-    temp = User_Order.objects.get(product_id=xid, owner=request.user)
-    if User_Order.objects.filter(product_id=xid, owner=request.user) and temp.selected_size.__contains__(','):
-        check = User_Order.objects.get(product_id=xid, owner=request.user)
+    temp = Cart_item.objects.get(product_id=xid, owner=request.user)
+    if Cart_item.objects.filter(product_id=xid, owner=request.user) and temp.selected_size.__contains__(','):
+        check = Cart_item.objects.get(product_id=xid, owner=request.user)
         check.product_qty -= 1
         i = len(check.selected_size) - 1
         x = str(check.selected_size)[:i-3]
