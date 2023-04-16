@@ -1,16 +1,11 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 import datetime
 from .models import *
 from .form import *
-from random import randint, randrange
-from django.urls import reverse
-from django.http.response import JsonResponse
+from random import randint
 from django.contrib.auth.views import *
 from django.http import HttpResponseRedirect, Http404
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
 
 
 def get_referer(request):
@@ -77,14 +72,10 @@ def item_page(request, myid):
         'page_name': 'Item Page',
         'nav': True
     }
-    y = []
     x = []
     x = Shoe.objects.filter(name=Shoe.objects.get(id=myid).name)
     if x.count() > 1:
         context["more_items"] = x
-        for i in x:
-            y.append(i.id)
-        context['more_items_id'] = y
     else:
         context["more_items"] = []
     return render(request, 'shoes/itempage.html', context)
@@ -96,7 +87,7 @@ def registration(request):
     msg = []
     if request.method == "POST":
         form = RegistrationForm(request.POST)
-        if form.is_valid():
+        if form.is_valid() and not User.objects.filter(email__contains=str(request.POST.get('email'))):
             form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, "{x} is Created Successfully".format(x=username))
