@@ -225,6 +225,13 @@ def add_To_Cart(request, xid):
         return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
+def additional_size(request, hid, jid):
+    check = Cart_item.objects.get(product_id=hid, owner=request.user)
+    check.selected_size += ", {y}".format(y=jid)
+    check.product_qty += 1
+    check.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
 def remove_From_Cart(request, xid):
     if not get_referer(request):
         raise Http404
