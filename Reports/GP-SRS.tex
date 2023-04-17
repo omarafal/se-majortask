@@ -44,7 +44,7 @@ urlcolor=blue,
 \begin{tabular}{|c|c|l|}
 \hline
 \thead{Version}    & \thead{Date} & \thead{Reason for Change}  \\ \hline
-1.0 & 18-Feb-2023   & \makecell[l]{SRS First version’s specifications are defined.}   \\ \hline
+1.0 & 17-Apr-2023   & \makecell[l]{SRS First version’s specifications are defined.}   \\ \hline
 %1.1 & 2-Dec-2022   & \makecell[l]{....\\.....\\........} \\ \hline
 %1.3 & 10-Dec-2022   & \makecell[l]{......\\......} \\ \hline
 \end{tabular}
@@ -82,7 +82,7 @@ The Software Requirement Specification Document (SRS) of this project is to over
 The SRS document of this project shall include the following
 \begin{itemize}
 \item Already delivered: front-end, proposal document.
-\item Yet to be delivered: back-end, testing document, and SSD document.
+\item Yet to be delivered: back-end, testing document, and SDD document.
 \item A guideline for the project's expected schedule.
 \item A list of functional and non-functional requirements.
 \end{itemize}
@@ -146,10 +146,9 @@ The website is built to:
  %\item Allow the clients to order through any available shoes. <---- Written by Roaa
  \item Enable the logged-in user to add any shoe to his cart.
  \item Inform the client of the estimated delivery time.
- \item Provide different types of payment like Cash, VISA, and American Express.   
+ \item Provide different types of payment like Cash, Visa, Master Card, and Meeza.   
  \item Not save any sensitive information like credit card details.
 \end{itemize}
-\newpage
 \subsection{System Context}
  \begin{figure}[h]
 \centering
@@ -182,35 +181,61 @@ External stakeholders are those who do not directly work with a company but are 
 \item Shoe supplier: A supply outlet that provides products to Shoezone
 \end{itemize}
 
-%\pagebreak 
+\pagebreak 
 \section{Functional Requirements}
 \subsection{System Functions}\label{System Functions}
+\includegraphics[width=1\linewidth]{functions.png}
 \subsubsection{Admin}
 The admin should be able to:
 \begin{itemize}
-\item Have the ability to update the database.
-\item Can keep track of clients orders status.
+\item Add shoe.
+\item Remove shoe.
+\item Edit shoe details including size, color, and prices
+\item Monitor users.
+\begin{itemize}
+    \item Add users.
+    \item Remove users.
+    \item Edit user's details.
+\end{itemize}
+\item View cart items for individual users.
+\item Keep track of clients orders status.
 \end{itemize}
 \subsubsection{Client}
 The Customer should be able to:
 \begin{itemize}
-\item Can sign up to creat an account.
-\item Can directly sign in, if he/she already had created an account.
-\item View shoes and available sizes.
-\item Search for shoes.
-\item Add and remove from the cart.
-\item Place an order, and know the estimated delivery time.
+\item Sign up to create an account with personal emails and custom usernames.
+\item Directly sign in, if he/she has an existing account.
+\item Search for a shoe through the search bar.
+\item View shoe details.
+\item Select wanted qualities for shoes before adding to cart (color and size).
+\item Add and remove shoes from the cart.
+\item Edit personal details including first name, last name, and email through profile page.
+\item Change account's password.
 \end{itemize}
 \section{Design Constraints}
-Shoezone website helps store customers view and order any shoes they want from their homes through a user-friendly website, thus they do not need to be physically in the store 
+Shoezone website helps store customers view and order any shoes they want from their homes through a user-friendly website that is hosted online on pythonanywhere using a 'Beginner' account therefore there tend to be a few limitations. 
 
 \subsection{ Standards Compliance}
+A working internet connection and almost any browser.
 
 \subsection{ Hardware Limitations}
-
+\begin{itemize}
+    \item A CPU allowance of 100 seconds only.
+    \item A limited/low bandwidth
+    \item A private file storage of merely 512 MB.
+\end{itemize}
 
 \section{Non-functional Requirements}
-200 word Limit.
+\begin{itemize}
+\item The web application shall have at least 5 GB of space available to use to store images and any other important media.
+\item Upgrade Django's default database from SQLite to MySQL to ensure the web application can handle a higher load of traffic, significantly more than 100K hits/day.
+\item The website must be checked upon ever three months to make sure it still works on pythonanywhere.
+\item The login/register systems must hash the passwords for increased security.
+\item An ease of access to the web application must be provided and supporting multiple browsers, at least 90\% of them, is important by testing the web application on different browsers and adjusting it accordingly.
+\item The website shall be easy to use.
+\item The website should be designed in a way that it only takes a user around three minutes to be fully capable of navigating through it.
+
+\end{itemize}
 
 % \section{Data Design}
 % Data Description (200 word Limit)
@@ -221,23 +246,28 @@ Shoezone website helps store customers view and order any shoes they want from t
 
 
 \section{Operational Scenarios}
-Initial Assumption: 
-Normal: The customer views the shoes on the website if the customer decides to order any of the shoes; It will require him to sign up if it is his first time using the website or sign in using his account if the customer has one. Subsequently, he will add any shoes he wants to the cart to checkout and place the order.
-What can go wrong:
-
+\textbf{Initial Assumption}: The user logs in or registers on the site. Tries searching for a shoe and adds it to cart.\\
+\textbf{Normal}: The customer views the shoes on the website. If the customer decides to order any of the shoes, it will require him to sign up if it is his first time using the website or sign in using his account if the customer has one. Subsequently, he will add any shoes he wants to the cart to
+checkout and place the order.\\
+\textbf{What can go wrong}:
 \begin{itemize}
-\item The user sign up with an existing email
-\item The user enters a wrong password, while signing in
+\item The user signs up with an existing email.
+\item The user enters a wrong password while trying to signing in.
+\item The user tries resetting the password and in doing so enters his old password.
+\item The user enters incorrect credit card details while trying to complete a purchase.
 \end{itemize}
-System state on completion: The user should be capable of viewing and searching for shoes before signing up or signing in if the user wanted to place an order then he/she should sign up or sign in 
+\textbf{System state on completion}: The user should be capable of viewing and searching for shoes before signing up or signing in if the user wanted to place an order then he should sign up or sign in and proceed to checkout providing his credit card credentials, that don't get saved, and completes the purchase.
 \section{Project Plan}
-
+\includegraphics[width=1\linewidth]{media/timeplan.png}
 
 \section{Appendices}
 
 \subsection{Definitions, Acronyms, Abbreviations}
-
+COVID-19: Coronavirus disease of 2019. \\
+SDD Document: Software Design Document. \\
+pythonanywhere: Online integrated development environment and web hosting service based on the Python programming language.\\
+SQLite: Database engine. \\ 
+MySQL: Open-source relational database management system. \\
 
 \printbibliography
 \end{document}
-
