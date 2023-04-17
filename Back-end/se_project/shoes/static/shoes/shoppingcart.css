@@ -27,6 +27,9 @@ body{
 /*.select-menu {*/
 /*    width: 0px;*/
 /*}*/
+.hide{
+    display: none;
+}
 .select-menu .select-btn {
     /*padding: 20px;*/
     font-size: 18px;
@@ -40,7 +43,7 @@ body{
     position: absolute;
     overflow-y: auto;
     z-index: 2;
-    max-height: 177px;
+    max-height: 145px;
     padding: 10px;
     margin-top: 10px;
     border-radius: 8px;
