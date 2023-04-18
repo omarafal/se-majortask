@@ -11,26 +11,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'shoes/sign_in.css' %}">
 </head>
+
 <body>
-<div class="container">
-    <form id="form_logout" method="POST">
-        {% csrf_token %}
-        <div class="anker">
-        <h1>You Have Been Logged Out</h1>
-        </div>
-        <div style="font-size: medium">
-            <br>
+    <div class="container">
+        <form id="form_logout" method="POST">
+            {% csrf_token %}
             <div class="anker">
-            <a  href="{% url 'shoes-home' %}">
-            <button class="btn" style="max-width: 125px" type="button">Go To Home</button>
-            </a>
-            <a  href="{% url 'login' %}">
-                <button class="btn " style="max-width: 125px;text-align:right;" type="button">Login Again</button>
-            </a>
+            <h1>You Have Been Logged Out</h1>
             </div>
-        </div>
-        <br>
-    </form>
-</div>
+            <div style="font-size: medium">
+                <br>
+                <div class="anker">
+                <a  href="{% url 'shoes-home' %}">
+                <button class="btn" style="max-width: 125px" type="button">Go To Home</button>
+                </a>
+                <a  href="{% url 'login' %}">
+                    <button class="btn " style="max-width: 125px;text-align:right;" type="button">Login Again</button>
+                </a>
+                </div>
+            </div>
+            <br>
+        </form>
+    </div>
 </body>
+
 </html>
