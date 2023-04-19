@@ -25,22 +25,24 @@
                         <div class="card-header py-3">
                             {% if no_items == 1 %}
                                 <h5 class="mb-0">Cart - {{ no_items }} item</h5>
-{#                                {% if messages %}#}
-{#                                    {% for message in messages %}#}
-{#                                        {{ message }}#}
-{#                                    {% endfor %}#}
-{#                                {% endif %}#}
                             {% else %}
                                 <h5 class="mb-0">Cart - {{ no_items }} items</h5>
-{#                                {% if messages %}#}
-{#                                    {% for message in messages %}#}
-{#                                        {{ message }}#}
-{#                                    {% endfor %}#}
-{#                                {% endif %}#}
                             {% endif %}
                         </div>
                         <div class="card-body">
                             <!-- Single item -->
+                            {% if not cart_items %}
+                                <h3 style="text-align: center">
+                                    Nothing To Display :(
+                                </h3>
+                                <div style="justify-content: center; display: flex; margin-top: 15px">
+                                    <a href="{% url 'shoes-home' %}">
+                                        <button type="button" name="checkout" class="btn btn-primary btn-lg btn-block"  style="background:darkorange">
+                                            Back To Home
+                                        </button>
+                                    </a>
+                                </div>
+                            {% endif %}
                             {% for i in cart_items %}
                                 <div class="row">
                                     <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
@@ -69,63 +71,61 @@
                                         <!-- Data -->
                                     </div>
                                     <!-- Quantity & Price -->
-                                        <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                                            <div class="d-flex mb-4">
-                                                <a href="/remove_quantity/{{ i.product.id }}">
-                                                    <button type="button" class="btn btn-primary btn-sm ms-1 me-1" data-mdb-toggle="tooltip" title="Remove item">
-                                                        <i class="fas fa-minus"></i>
-                                                    </button>
-                                                </a>
-{#                                                <div class="form-outline">#}
-{#                                                    <p class="text-start" style="margin-bottom: 0"><strong>Quantity:</strong>  {{ i.product_qty }}</p>#}
-{#                                                </div>#}
-                                                <div class="form-outline" >
-                                                    <input id="form1" min="1" name="quantity" type="text" value="{{ i.product_qty }}" disabled class="form-control active">
-                                                    <label class="form-label" for="form1" style="margin-left: 0px;">Quantity</label>
-                                                    <div class="form-notch">
-                                                        <div class="form-notch-leading" style="width: 9px;"></div>
-                                                        <div class="form-notch-middle" style="width: 54px;"></div>
-                                                        <div class="form-notch-trailing"></div>
-                                                    </div>
+                                    <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                                        <div class="d-flex mb-4">
+                                            <a href="/remove_quantity/{{ i.product.id }}">
+                                                <button type="button" class="btn btn-primary btn-sm ms-1 me-1" data-mdb-toggle="tooltip" title="Remove item">
+                                                    <i class="fas fa-minus"></i>
+                                                </button>
+                                            </a>
+                                            <div class="form-outline" >
+                                                <input id="form1" min="1" name="quantity" type="text" value="{{ i.product_qty }}" disabled class="form-control active">
+                                                <label class="form-label" for="form1" style="margin-left: 0px;">Quantity</label>
+                                                <div class="form-notch">
+                                                    <div class="form-notch-leading" style="width: 9px;"></div>
+                                                    <div class="form-notch-middle" style="width: 54px;"></div>
+                                                    <div class="form-notch-trailing"></div>
                                                 </div>
-{#                                                ///////////////#}
-                                                <div class="select-menu" id="{{ i.product.id }}">
-                                                    <div class="select-btn" id="B{{ i.product.id }}">
-                                                        <button type="button" class="btn btn-primary btn-sm ms-1 me-1" data-mdb-toggle="tooltip" title="Add item"><i class="fas fa-plus"></i></button>
-                                                    </div>
-                                                    <ul class="options" style="list-style-type: none" id="L{{ i.product.id }}">
-                                                        <li><a class="option" href="/add_quantity/{{ i.product.id }}/38">
-                                                            <span class="option-text">38</span>
-                                                        </a></li>
-                                                        <li><a class="option" href="/add_quantity/{{ i.product.id }}/39">
-                                                            <span class="option-text">39</span>
-                                                        </a></li>
-                                                        <li><a class="option" href="/add_quantity/{{ i.product.id }}/40">
-                                                            <span class="option-text">40</span>
-                                                        </a></li>
-                                                        <li><a class="option" href="/add_quantity/{{ i.product.id }}/41">
-                                                            <span class="option-text">41</span>
-                                                        </a></li>
-                                                        <li><a class="option" href="/add_quantity/{{ i.product.id }}/42">
-                                                            <span class="option-text">42</span>
-                                                        </a></li>
-                                                        <li><a class="option" href="/add_quantity/{{ i.product.id }}/43">
-                                                            <span class="option-text">43</span>
-                                                        </a></li>
-                                                        <li><a class="option" href="/add_quantity/{{ i.product.id }}/44">
-                                                            <span class="option-text">44</span>
-                                                        </a></li>
-                                                        <li><a class="option" href="/add_quantity/{{ i.product.id }}/45">
-                                                            <span class="option-text">45</span>
-                                                        </a></li>
-                                                    </ul>
-                                                </div>
-{#                                                /////////////#}
                                             </div>
-                                            <p style="text-align: center">
-                                                <strong>{{ i.product.price }}</strong>
-                                            </p>
+                                            {#                                                ///////////////#}
+                                            <div class="select-menu" id="{{ i.product.id }}">
+                                                <div class="select-btn" id="B{{ i.product.id }}">
+                                                    <button type="button" class="btn btn-primary btn-sm ms-1 me-1" data-mdb-toggle="tooltip" title="Add item"><i class="fas fa-plus"></i></button>
+                                                </div>
+                                                <ul class="options" style="list-style-type: none" id="L{{ i.product.id }}">
+                                                    <h6 class="text-center">Select Size</h6>
+                                                    <li><a class="option" href="/add_quantity/{{ i.product.id }}/38">
+                                                        <span class="option-text">38</span>
+                                                    </a></li>
+                                                    <li><a class="option" href="/add_quantity/{{ i.product.id }}/39">
+                                                        <span class="option-text">39</span>
+                                                    </a></li>
+                                                    <li><a class="option" href="/add_quantity/{{ i.product.id }}/40">
+                                                        <span class="option-text">40</span>
+                                                    </a></li>
+                                                    <li><a class="option" href="/add_quantity/{{ i.product.id }}/41">
+                                                        <span class="option-text">41</span>
+                                                    </a></li>
+                                                    <li><a class="option" href="/add_quantity/{{ i.product.id }}/42">
+                                                        <span class="option-text">42</span>
+                                                    </a></li>
+                                                    <li><a class="option" href="/add_quantity/{{ i.product.id }}/43">
+                                                        <span class="option-text">43</span>
+                                                    </a></li>
+                                                    <li><a class="option" href="/add_quantity/{{ i.product.id }}/44">
+                                                        <span class="option-text ">44</span>
+                                                    </a></li>
+                                                    <li><a class="option" href="/add_quantity/{{ i.product.id }}/45">
+                                                        <span class="option-text">45</span>
+                                                    </a></li>
+                                                </ul>
+                                            </div>
+                                            {#                                                /////////////#}
                                         </div>
+                                        <p style="text-align: center">
+                                            <strong>{{ i.product.price }}</strong>
+                                        </p>
+                                    </div>
                                 </div>
                                 <!-- Single item -->
                                 <hr class="my-4" />
