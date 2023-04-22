@@ -64,6 +64,25 @@ def search_shoes(request):
     return render(request, 'shoes/search_shoes.html', context)
 
 
+def sort_search(request, criteria):
+    if request.POST['sort_criteria'] == 'Name (Ascending)':
+        shoes_brands = Shoe.objects.filter(brand__contains=criteria).order_by('name')
+    elif request.POST['sort_criteria'] == 'Name (Descending)':
+        shoes_brands = Shoe.objects.filter(brand__contains=criteria).order_by('-name')
+    elif request.POST['sort_criteria'] == 'Price (Ascending)':
+        shoes_brands = Shoe.objects.filter(brand__contains=criteria).order_by('price')
+    elif request.POST['sort_criteria'] == 'Price (Descending)':
+        shoes_brands = Shoe.objects.filter(brand__contains=criteria).order_by('-price')
+    else:
+        shoes_brands = Shoe.objects.filter(brand__contains=criteria)
+    context = {
+        'searched': criteria,
+        'shoes_brands': shoes_brands,
+        'page_name': 'Search Results',
+        'nav': True
+    }
+    return render(request, 'shoes/search_shoes.html', context)
+
 def item_page(request, item_id):
     if not get_referer(request):
         raise Http404
@@ -90,7 +109,7 @@ def registration(request):
         if form.is_valid() and not User.objects.filter(email__contains=str(request.POST.get('email'))):
             form.save()
             username = form.cleaned_data.get('username')
-            messages.success(request, "{x} is Created Successfully".format(x=username))
+            messages.success(request, "{x}\'s Account is Created Successfully".format(x=username))
             return redirect('login')
         else:
             if not form.cleaned_data.get('password1') == form.cleaned_data.get('password2'):
@@ -115,6 +134,22 @@ def men(request):
     }
     return render(request, 'shoes/men.html', context)
 
+def sort_men(request):
+    context = {
+        'page_name': 'Men',
+        'nav': True
+    }
+    if request.POST.get('sort_criteria') == 'Name (Ascending)':
+        context['shoes'] = Shoe.objects.order_by('name')
+    elif request.POST.get('sort_criteria') == 'Name (Descending)':
+        context['shoes'] = Shoe.objects.order_by('-name')
+    elif request.POST.get('sort_criteria') == 'Price (Ascending)':
+        context['shoes'] = Shoe.objects.order_by('price')
+    elif request.POST.get('sort_criteria') == 'Price (Descending)':
+        context['shoes'] = Shoe.objects.order_by('-price')
+    else:
+        context['shoes'] = Shoe.objects.all()
+    return render(request, 'shoes/men.html', context)
 
 def women(request):
     context = {
@@ -124,6 +159,24 @@ def women(request):
     }
     return render(request, 'shoes/women.html', context)
 
+
+def sort_women(request):
+    context = {
+        'shoes': Shoe.objects.all(),
+        'page_name': 'Women',
+        'nav': True
+    }
+    if request.POST.get('sort_criteria') == 'Name (Ascending)':
+        context['shoes'] = Shoe.objects.order_by('name')
+    elif request.POST.get('sort_criteria') == 'Name (Descending)':
+        context['shoes'] = Shoe.objects.order_by('-name')
+    elif request.POST.get('sort_criteria') == 'Price (Ascending)':
+        context['shoes'] = Shoe.objects.order_by('price')
+    elif request.POST.get('sort_criteria') == 'Price (Descending)':
+        context['shoes'] = Shoe.objects.order_by('-price')
+    else:
+        context['shoes'] = Shoe.objects.all()
+    return render(request, 'shoes/women.html', context)
 
 def cart(request):
     if not get_referer(request):

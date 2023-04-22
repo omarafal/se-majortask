@@ -53,6 +53,20 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
+        <form method="POST" action="/sort_men">
+            {% csrf_token %}
+            <h5>Sort By:</h5>
+            <select name="sort_criteria">
+                <option selected disabled="true">---Select Criteria---</option>
+                <option>Name (Ascending)</option>
+                <option>Name (Descending)</option>
+                <option>Price (Ascending)</option>
+                <option>Price (Descending)</option>
+            </select>
+            <button type="submit">
+                <span>Sort</span>
+            </button>
+        </form>
     <div data-aos="zoom-in" data-aos-offset="150" data-aos-delay="0"><h1 style="margin-top: 20px;display: flex; justify-content: center;">Men Shoes</h1></div>
             <div class="container page-wrapper" data-aos="fade-up" data-aos-delay="100">
                 {% for i in shoes %}
