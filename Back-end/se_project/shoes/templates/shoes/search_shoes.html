@@ -16,6 +16,20 @@
         <br>
             <h1 align="center"> You Searched For {{ searched }}</h1>
         <br/>
+        <form method="POST" action="/sort/{{ searched }}">
+            {% csrf_token %}
+            <h5>Sort By:</h5>
+            <select name="sort_criteria">
+                <option selected disabled="true">---Select Criteria---</option>
+                <option>Name (Ascending)</option>
+                <option>Name (Descending)</option>
+                <option>Price (Ascending)</option>
+                <option>Price (Descending)</option>
+            </select>
+            <button type="submit">
+                <span>Sort</span>
+            </button>
+        </form>
         {% if shoes_brands %}
             <div class="container page-wrapper" data-aos="fade-up" data-aos-delay="100">
             {% for i in shoes_brands %}
