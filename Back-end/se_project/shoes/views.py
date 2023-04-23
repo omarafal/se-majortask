@@ -65,22 +65,26 @@ def search_shoes(request):
 
 
 def sort_search(request, criteria):
-    if request.POST['sort_criteria'] == 'Name (Ascending)':
-        shoes_brands = Shoe.objects.filter(brand__contains=criteria).order_by('name')
-    elif request.POST['sort_criteria'] == 'Name (Descending)':
-        shoes_brands = Shoe.objects.filter(brand__contains=criteria).order_by('-name')
-    elif request.POST['sort_criteria'] == 'Price (Ascending)':
-        shoes_brands = Shoe.objects.filter(brand__contains=criteria).order_by('price')
-    elif request.POST['sort_criteria'] == 'Price (Descending)':
-        shoes_brands = Shoe.objects.filter(brand__contains=criteria).order_by('-price')
-    else:
-        shoes_brands = Shoe.objects.filter(brand__contains=criteria)
     context = {
         'searched': criteria,
-        'shoes_brands': shoes_brands,
+        'sort': ' ',
         'page_name': 'Search Results',
         'nav': True
     }
+    if request.POST.get('sort_criteria') == 'Name (A - Z)':
+        context['shoes_brands'] = Shoe.objects.filter(brand__contains=criteria).order_by('name')
+        context['sort'] = 'Name (A - Z)'
+    elif request.POST.get('sort_criteria') == 'Name (Z - A)':
+        context['shoes_brands'] = Shoe.objects.filter(brand__contains=criteria).order_by('-name')
+        context['sort'] = 'Name (Z - A)'
+    elif request.POST.get('sort_criteria') == 'Price (Low - High)':
+        context['shoes_brands'] = Shoe.objects.filter(brand__contains=criteria).order_by('price')
+        context['sort'] = 'Price (Low - High)'
+    elif request.POST.get('sort_criteria') == 'Price (High - Low)':
+        context['shoes_brands'] = Shoe.objects.filter(brand__contains=criteria).order_by('-price')
+        context['sort'] = 'Price (High - Low)'
+    else:
+        context['shoes_brands'] = Shoe.objects.filter(brand__contains=criteria)
     return render(request, 'shoes/search_shoes.html', context)
 
 def item_page(request, item_id):
@@ -132,21 +136,29 @@ def men(request):
         'page_name': 'Men',
         'nav': True
     }
+    # if request.method == "GET":
+    #     form = Search(request.GET)
+    #     context['form'] = form
     return render(request, 'shoes/men.html', context)
 
 def sort_men(request):
     context = {
         'page_name': 'Men',
+        'sort': ' ',
         'nav': True
     }
-    if request.POST.get('sort_criteria') == 'Name (Ascending)':
+    if request.POST.get('sort_criteria') == 'Name (A - Z)':
         context['shoes'] = Shoe.objects.order_by('name')
-    elif request.POST.get('sort_criteria') == 'Name (Descending)':
+        context['sort'] = 'Name (A - Z)'
+    elif request.POST.get('sort_criteria') == 'Name (Z - A)':
         context['shoes'] = Shoe.objects.order_by('-name')
-    elif request.POST.get('sort_criteria') == 'Price (Ascending)':
+        context['sort'] = 'Name (Z - A)'
+    elif request.POST.get('sort_criteria') == 'Price (Low - High)':
         context['shoes'] = Shoe.objects.order_by('price')
-    elif request.POST.get('sort_criteria') == 'Price (Descending)':
+        context['sort'] = 'Price (Low - High)'
+    elif request.POST.get('sort_criteria') == 'Price (High - Low)':
         context['shoes'] = Shoe.objects.order_by('-price')
+        context['sort'] = 'Price (High - Low)'
     else:
         context['shoes'] = Shoe.objects.all()
     return render(request, 'shoes/men.html', context)
@@ -162,18 +174,22 @@ def women(request):
 
 def sort_women(request):
     context = {
-        'shoes': Shoe.objects.all(),
+        'sort': ' ',
         'page_name': 'Women',
         'nav': True
     }
-    if request.POST.get('sort_criteria') == 'Name (Ascending)':
+    if request.POST.get('sort_criteria') == 'Name (A - Z)':
         context['shoes'] = Shoe.objects.order_by('name')
-    elif request.POST.get('sort_criteria') == 'Name (Descending)':
+        context['sort'] = 'Name (A - Z)'
+    elif request.POST.get('sort_criteria') == 'Name (Z - A)':
         context['shoes'] = Shoe.objects.order_by('-name')
-    elif request.POST.get('sort_criteria') == 'Price (Ascending)':
+        context['sort'] = 'Name (Z - A)'
+    elif request.POST.get('sort_criteria') == 'Price (Low - High)':
         context['shoes'] = Shoe.objects.order_by('price')
-    elif request.POST.get('sort_criteria') == 'Price (Descending)':
+        context['sort'] = 'Price (Low - High)'
+    elif request.POST.get('sort_criteria') == 'Price (High - Low)':
         context['shoes'] = Shoe.objects.order_by('-price')
+        context['sort'] = 'Price (High - Low)'
     else:
         context['shoes'] = Shoe.objects.all()
     return render(request, 'shoes/women.html', context)
