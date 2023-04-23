@@ -14,6 +14,7 @@
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 {% endblock head %}
 
 {% block content %}
@@ -119,7 +120,6 @@
             easing:'ease-out-back',
         });
     </script>
-    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     <script>
         const arr = [];
         let j = 0;
@@ -178,5 +178,42 @@
             document.getElementById("choosen").innerHTML=$(this).text();
             $('#submit_form').trigger('click');
         });
+    </script>
+    <script>
+        const recordVerticalOffset = () => {
+
+            localStorage.setItem('pageVerticalPosition', window.scrollY);
+        }
+
+        // Only save window position after scrolling stops
+        const throttleScroll = (delay) => {
+
+            let time = Date.now();
+
+            const checkScroll = setInterval(() => {
+
+                if (Date.now() > (time + delay)) {
+
+                    clearInterval(checkScroll);
+                    return recordVerticalOffset();
+                }
+            }, 300);
+        }
+
+        // Scroll Event Listener
+        window.addEventListener('scroll', throttleScroll(1000));
+
+
+        // DESTINATION PAGE
+        // ================
+
+        const repositionPage = () => {
+
+            let pageVerticalPosition = localStorage.getItem('pageVerticalPosition') || 0;
+
+            window.scrollTo(0, pageVerticalPosition);
+        }
+
+        window.addEventListener('load', repositionPage);
     </script>
 {% endblock additional %}
