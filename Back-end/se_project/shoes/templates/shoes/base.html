@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,14 +12,14 @@
         <title>Shoezone</title>
     {% endif %}
     <link rel="icon" type="image/x-icon" href="../../../media/shoes/Media/favicon.png">
-
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     {% block head %}{% endblock head %}
 </head>
 
 {% if class_css %}
-    <body class="{{class_css}}">
+    <body class="{{class_css}}" id="main_site1">
 {% else %}
-    <body>
+    <body id="main_site2">
 {% endif %}
 {% if nav %}
     <header>
@@ -49,11 +50,13 @@
                             </a>
                         {% endif %}
                         <li class="nav-item dropdown menu item">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: black">
+                            <a class="nav-link dropdown-toggle" id="mybt2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: black">
                                 Profile
                             </a>
                             <ul class="dropdown-menu">
                                 {% if user.is_authenticated %}
+                                    <h6 class="wlcmMsg" style="text-align: center" id="greeting">Hi, {{ user.username }}</h6>
+                                    <hr style="margin:5px">
                                     <li><a class="dropdown-item dropmenu_hover" href="{% url 'profile' %}" name="">Profile</a></li>
                                     <li><a class="dropdown-item dropmenu_hover" href="{% url 'logout' %}" name="register">Logout</a></li>
                                 {% else %}
@@ -87,11 +90,13 @@
                     </li>
                 {% endif %}
                 <li class="nav-item dropdown ipad" style="margin-top: -10px;list-style:none;">
-                    <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link " id="mybt" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-person-circle material-icons" style="font-size:38px; margin:0px 0px 0px 16px;" title="Profile"></i>
                     </a>
                     <ul class="dropdown-menu" style="margin:1.4vw 0vw 0vw -190%">
                         {% if user.is_authenticated %}
+                            <h6 class="wlcmMsg" style="text-align: center" id="greeting">Hi, {{ user.username }}</h6>
+                            <hr style="margin:5px">
                             <li><a class="dropdown-item dropmenu_hover" href="{% url 'profile' %}" name="">Profile</a></li>
                             <li><a class="dropdown-item dropmenu_hover" href="{% url 'logout' %}" name="register">Logout</a></li>
                         {% else %}
@@ -103,11 +108,32 @@
         </nav>
     </header>
 {% endif %}
-
+<span id="page">
 {% block content %}{% endblock content %}
+</span>
+</body>
 </body>
 
 {% if nav %}
+    <script>
+        $('#mybt').on("click", function() {
+            $('.dropdown-menu').toggleClass("show");
+            $('.nav-link').toggleClass("show");
+            $('#page').one('click',function() {
+                $(".dropdown-menu").toggleClass("show");
+            });
+        });
+
+        $('#mybt2').on("click", function() {
+            $('.dropdown-menu').toggleClass("show");
+            $('.nav-link').toggleClass("show");
+            $('#page').one('click',function() {
+                $(".dropdown-menu").toggleClass("show");
+            });
+        });
+        event.stopPropagation();
+    </script>
+    <script defer src="{% static 'shoes/base.js' %}"></script>
     <footer class="footer">
 
         <span style="margin: 20px 0 0 20px">
