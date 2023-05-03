@@ -11,6 +11,7 @@ urlpatterns = [
     path('women/', views.women, name='women'),
     # Search Page
     path('search_shoes/', views.search_shoes, name='search_shoes'),
+    path('search_auto/', views.search_autocomp, name='search_auto'),
     # Login System Pages
     path('register/', views.registration, name='register'),
     path('profile/', views.profile, name='profile'),

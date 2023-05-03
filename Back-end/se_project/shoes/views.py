@@ -4,7 +4,7 @@ from .models import *
 from .form import *
 from random import randint
 from django.contrib.auth.views import *
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404, JsonResponse
 from django.contrib import messages
 
 # Function To Check For URL Direct Access
@@ -84,6 +84,18 @@ def search_shoes(request):
     else:
         context['shoes_brands'] = Shoe.objects.filter(brand__contains=searched)
     return render(request, 'shoes/search_shoes.html', context)
+
+def search_autocomp(request):
+    address = request.GET.get('address')
+    context = {
+        'status': 200,
+    }
+    arr = []
+    if address:
+        if Shoe.objects.filter(brand__contains=address):
+            arr.append(Shoe.objects.filter(brand__contains=address)[0].brand)
+    context['data'] = arr
+    return JsonResponse(context)
 
 def item_page(request, item_id):
     if not get_referer(request):
