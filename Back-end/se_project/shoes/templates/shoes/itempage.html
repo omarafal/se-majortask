@@ -35,7 +35,7 @@
                 </header>
                   <div class="color" style="margin-top: 60px">
                               {% if more_items %}
-                                  <h5>select color:</h5>
+                                  <h5 class="label">select color:</h5>
                                   <ul style="margin: 0px">
                                   {% for j in more_items %}
                                       {% if j.color_hexa != "#000000" %}
@@ -58,20 +58,18 @@
                       </div>
                      <form method="POST" action="/add_product/{{ i.id }}">
                       {% csrf_token %}
-                      <div class="size" style="max-width: 10vw; margin-top: 20px">
-                          <h5>select size:</h5>
-                          <select name="sizeselect">
-                              <option selected disabled="true">---Select Size---</option>
-                              <option>38</option>
-                              <option>39</option>
-                              <option>40</option>
-                              <option>41</option>
-                              <option>42</option>
-                              <option>43</option>
-                              <option>44</option>
-                              <option>45</option>
-                          </select>
-                      </div>
+                      <h5 onclick="myfunc();" style="display:inline;cursor: pointer;" class="label">Select Size: </h5>
+                      <h6 onclick="myfunc();" style="display: inline;cursor: pointer;" id="choosen" class="label">{{ sort }}</h6>
+                      <select name="sizeselect" id="sources" class="custom-select sources" placeholder=" ">
+                            <option value="38">38</option>
+                            <option value="39">39</option>
+                            <option value="40">40</option>
+                            <option value="41">41</option>
+                            <option value="42">42</option>
+                            <option value="43">43</option>
+                            <option value="44">44</option>
+                            <option value="45">45</option>
+                      </select>
                       <script>
                           function myfunction(){
                               alert("Please Sign in :(");
@@ -114,5 +112,85 @@
                 window.scrollTo(0, 0);
             }
         }
+    </script>
+    <script>
+        const arr = [];
+        let j = 0;
+        {% for i in shoes %}
+            arr[j] = $("#shoe_item{{ i.id }}");
+            j++;
+        {% endfor %}
+    
+        $(".custom-select").each(function() {
+            var classes = $(this).attr("class"),
+            id      = $(this).attr("id"),
+            name    = $(this).attr("name");
+            var template =  '<div class="' + classes + '">';
+            template += '<span class="custom-select-trigger">' + $(this).attr("placeholder") + '</span>';
+            template += '<div class="custom-options">';
+                $(this).find("option").each(function() {
+                template += '<span class="custom-option ' + $(this).attr("class") + '" data-value="' + $(this).attr("value") + '">' + $(this).html() + '</span>';
+                });
+                template += '</div></div>';
+            $(this).wrap('<div class="custom-select-wrapper"></div>');
+            $(this).hide();
+            $(this).after(template);
+        });
+        $(".custom-option:first-of-type").hover(function() {
+            $(this).parents(".custom-options").addClass("option-hover");
+        }, function() {
+            $(this).parents(".custom-options").removeClass("option-hover");
+        });
+        $(".custom-select-trigger").on("click", function() {
+            $('html').one('click',function() {
+                $(".custom-select").removeClass("opened");
+                for (let w = 0; w < arr.length; w++) {
+                    arr[w].css("zIndex", "");
+                }
+            });
+            for (let y = 0; y < arr.length; y++) {
+                arr[y].css("zIndex", "-1");
+            }
+            $(this).parents(".custom-select").toggleClass("opened");
+            $('.custom-select-trigger').on('click',function() {
+                if(!$(this).parents(".custom-select").hasClass("opened")){
+                    for (let z = 0; z < arr.length; z++){
+                        arr[z].css("zIndex", "");
+                    }
+                }
+        });
+        event.stopPropagation();
+        });
+    
+        function myfunc(){
+            $('html').one('click',function() {
+                $(".custom-select").removeClass("opened");
+                for (let w = 0; w < arr.length; w++) {
+                    arr[w].css("zIndex", "");
+                }
+            });
+            for (let y = 0; y < arr.length; y++) {
+                arr[y].css("zIndex", "-1");
+            }
+            $(".custom-select").toggleClass("opened");
+            function myfunc(){
+                if(!$(this).parents(".custom-select").hasClass("opened")){
+                    for (let z = 0; z < arr.length; z++){
+                        arr[z].css("zIndex", "");
+                    }
+                }
+            }
+            event.stopPropagation();
+        }
+    
+        $(".custom-option").on("click", function() {
+            $(this).parents(".custom-select-wrapper").find("select").val($(this).data("value"));
+            $(this).parents(".custom-options").find(".custom-option").removeClass("selection");
+            $(this).addClass("selection");
+            $(this).parents(".custom-select").removeClass("opened");
+            // $(this).parents(".custom-select").find(".custom-select-trigger").text($(this).text());
+            document.getElementById("choosen").innerHTML=$(this).text();
+            $('#submit_form').trigger('click');
+        });
     </script>
 {% endblock additional %}
