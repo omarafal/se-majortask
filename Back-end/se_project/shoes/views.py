@@ -37,11 +37,20 @@ def home(request):
     }
     return render(request, 'shoes/home.html', context)
 
+variable = ""
 
 def search_shoes(request):
     if not get_referer(request):
         raise Http404
-    searched = request.POST['searched']
+    global variable
+    if request.POST.get('searched'):
+        searched = request.POST.get('searched')
+        variable = searched
+    elif request.POST.get('sort_criteria'):
+        searched = variable
+    else:
+        searched = ""
+        variable = ""
     searched = str(searched).replace(" ", "")
     searched = searched.lower()
     if searched.__contains__("nike"):
@@ -54,37 +63,26 @@ def search_shoes(request):
         searched = "New Balance"
     elif searched.__contains__("converse"):
         searched = "Converse"
-    shoes_brands = Shoe.objects.filter(brand__contains=searched)
     context = {
         'searched': searched,
-        'shoes_brands': shoes_brands,
         'page_name': 'Search Results',
         'nav': True
     }
-    return render(request, 'shoes/search_shoes.html', context)
-
-
-def sort_search(request, criteria):
-    context = {
-        'searched': criteria,
-        'sort': ' ',
-        'page_name': 'Search Results',
-        'nav': True
-    }
-    if request.POST.get('sort_criteria') == 'Name (A - Z)':
-        context['shoes_brands'] = Shoe.objects.filter(brand__contains=criteria).order_by('name')
-        context['sort'] = 'Name (A - Z)'
-    elif request.POST.get('sort_criteria') == 'Name (Z - A)':
-        context['shoes_brands'] = Shoe.objects.filter(brand__contains=criteria).order_by('-name')
-        context['sort'] = 'Name (Z - A)'
-    elif request.POST.get('sort_criteria') == 'Price (Low - High)':
-        context['shoes_brands'] = Shoe.objects.filter(brand__contains=criteria).order_by('price')
-        context['sort'] = 'Price (Low - High)'
-    elif request.POST.get('sort_criteria') == 'Price (High - Low)':
-        context['shoes_brands'] = Shoe.objects.filter(brand__contains=criteria).order_by('-price')
-        context['sort'] = 'Price (High - Low)'
+    if request.POST.get('sort_criteria'):
+        if request.POST.get('sort_criteria') == 'Name (A - Z)':
+            context['shoes_brands'] = Shoe.objects.filter(brand__contains=searched).order_by('name')
+            context['sort'] = 'Name (A - Z)'
+        elif request.POST.get('sort_criteria') == 'Name (Z - A)':
+            context['shoes_brands'] = Shoe.objects.filter(brand__contains=searched).order_by('-name')
+            context['sort'] = 'Name (Z - A)'
+        elif request.POST.get('sort_criteria') == 'Price (Low - High)':
+            context['shoes_brands'] = Shoe.objects.filter(brand__contains=searched).order_by('price')
+            context['sort'] = 'Price (Low - High)'
+        elif request.POST.get('sort_criteria') == 'Price (High - Low)':
+            context['shoes_brands'] = Shoe.objects.filter(brand__contains=searched).order_by('-price')
+            context['sort'] = 'Price (High - Low)'
     else:
-        context['shoes_brands'] = Shoe.objects.filter(brand__contains=criteria)
+        context['shoes_brands'] = Shoe.objects.filter(brand__contains=searched)
     return render(request, 'shoes/search_shoes.html', context)
 
 def item_page(request, item_id):
@@ -132,19 +130,8 @@ def registration(request):
 
 def men(request):
     context = {
-        'shoes': Shoe.objects.all(),
-        'page_name': 'Men',
-        'nav': True
-    }
-    # if request.method == "GET":
-    #     form = Search(request.GET)
-    #     context['form'] = form
-    return render(request, 'shoes/men.html', context)
-
-def sort_men(request):
-    context = {
-        'page_name': 'Men',
         'sort': ' ',
+        'page_name': 'Men',
         'nav': True
     }
     if request.POST.get('sort_criteria') == 'Name (A - Z)':
@@ -164,15 +151,6 @@ def sort_men(request):
     return render(request, 'shoes/men.html', context)
 
 def women(request):
-    context = {
-        'shoes': Shoe.objects.all(),
-        'page_name': 'Women',
-        'nav': True
-    }
-    return render(request, 'shoes/women.html', context)
-
-
-def sort_women(request):
     context = {
         'sort': ' ',
         'page_name': 'Women',

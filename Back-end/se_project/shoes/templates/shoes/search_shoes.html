@@ -15,24 +15,24 @@
 <main>
 {% if searched %}
         <br>
-            <h1 align="center"> You Searched For {{ searched }}</h1>
+            <h1 align="center">You Searched For {{ searched }}</h1>
         <br/>
-        <div data-aos="zoom" class="filter" data-aos-offset="200" data-aos-delay="0">
-            <form method="POST" action="/sort/{{ searched }}">
-                {% csrf_token %}
-                <h5 onclick="myfunc();" style="display:inline">Sort By: </h5><h6 onclick="myfunc();" style="display: inline;" id="choosen">{{ sort }}</h6>
-                <select name="sort_criteria" id="sources" class="custom-select sources" placeholder=" ">
-                    <option value="Name (A - Z)">Name (A - Z)</option>
-                    <option value="Name (Z - A)">Name (Z - A)</option>
-                    <option value="Price (Low - High)">Price (Low - High)</option>
-                    <option value="Price (High - Low)">Price (High - Low)</option>
-                </select>
-                <button hidden type="submit" id="submit_form" class="sortBtn btn btn-outline-primary" style="margin-left: 25px">
-                    <span>Sort</span>
-                </button>
-            </form>
-        </div>
         {% if shoes_brands %}
+            <div data-aos="zoom" class="filter" data-aos-offset="200" data-aos-delay="0">
+                <form method="POST" action="{% url 'search_shoes' %}">
+                    {% csrf_token %}
+                    <h5 onclick="myfunc();" style="display:inline">Sort By: </h5><h6 onclick="myfunc();" style="display: inline;" id="choosen">{{ sort }}</h6>
+                    <select name="sort_criteria" id="sources" class="custom-select sources" placeholder=" ">
+                        <option value="Name (A - Z)">Name (A - Z)</option>
+                        <option value="Name (Z - A)">Name (Z - A)</option>
+                        <option value="Price (Low - High)">Price (Low - High)</option>
+                        <option value="Price (High - Low)">Price (High - Low)</option>
+                    </select>
+                    <button hidden type="submit" id="submit_form" class="sortBtn btn btn-outline-primary" style="margin-left: 25px">
+                        <span>Sort</span>
+                    </button>
+                </form>
+            </div>
             <div class="container page-wrapper" data-aos="fade-up" data-aos-delay="100">
             {% for i in shoes_brands %}
             <div class="page-inner" style="z-index: 5" id="shoe_item{{ i.id }}">
@@ -71,7 +71,7 @@
         {% endif %}
     {% else %}
         <br>
-        <h1 align="center"> Please Enter The Brand in Search Box</h1>
+        <h1 align="center">You Searched For Nothing</h1>
     {% endif %}
 </main>
 {% endblock content %}

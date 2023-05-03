@@ -58,7 +58,7 @@
     </div>
     <div data-aos="zoom-in" data-aos-offset="150" data-aos-delay="0"><h1 style="margin-top: 20px;display: flex; justify-content: center;">Men Shoes</h1></div>
             <div data-aos="zoom" class="filter" data-aos-offset="200" data-aos-delay="0">
-                <form method="POST" action="/sort_men">
+                <form method="POST" action="{% url 'men' %}">
                     {% csrf_token %}
                     <h5 onclick="myfunc();" id="#sortby" style="display:inline">Sort By: </h5><h6 onclick="myfunc();" style="display: inline;" id="choosen">{{ sort }}</h6>
                     <select name="sort_criteria" id="sources" class="custom-select sources" placeholder=" ">
