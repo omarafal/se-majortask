@@ -167,7 +167,7 @@
             event.stopPropagation();
         });
 
-        function myfunc(){
+        function myfunc(event){
             $('html').one('click',function() {
                 $(".custom-select").removeClass("opened");
                 for (let w = 0; w < arr.length; w++) {

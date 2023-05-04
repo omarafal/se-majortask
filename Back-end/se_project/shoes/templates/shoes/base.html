@@ -123,9 +123,11 @@
 
 {% if nav %}
     <script>
+        var main_url = '';
         new Autocomplete('#autocomplete', {
             search: input => {
                 const url = '/search_auto/?address=' + input
+                main_url = '/search_shoes/?criteria=' + input
 
                 return new Promise(resolve => {
                         fetch(url)
@@ -135,6 +137,9 @@
                         })
                 })
             },
+            onSubmit : result => {
+                window.location.href = main_url;
+            }
         });
         function wid_func() {
             $('#search_res').css("width", "99.8%");

@@ -48,6 +48,9 @@ def search_shoes(request):
         variable = searched
     elif request.POST.get('sort_criteria'):
         searched = variable
+    elif request.GET.get('criteria'):
+        searched = request.GET.get('criteria')
+        variable = searched
     else:
         searched = ""
         variable = ""
