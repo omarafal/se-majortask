@@ -128,7 +128,7 @@
                                 for (let x = 0; x < j; x++) {
                                     array2[x].on("click", function(){
                                         $('html').one('click',function() {
-                                            array[x].removeClass("active");
+                                            array[x].classList.remove("active");
                                         });
                                         array[x].classList.toggle("active")
                                         event.stopPropagation();
@@ -148,8 +148,8 @@
                                         });
                                     {% endfor %}
                                 }
-                                {% for i in cart_items %}
                                 let h=0;
+                                {% for i in cart_items %}
                                     array3[h].on("click", function (){
                                         console.log("Deleted");
                                         window.location.href = '/remove_product/{{ i.product.id }}';
