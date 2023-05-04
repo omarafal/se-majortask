@@ -68,19 +68,18 @@ def search_shoes(request):
         'page_name': 'Search Results',
         'nav': True
     }
-    if request.POST.get('sort_criteria'):
-        if request.POST.get('sort_criteria') == 'Name (A - Z)':
-            context['shoes_brands'] = Shoe.objects.filter(brand__contains=searched).order_by('name')
-            context['sort'] = 'Name (A - Z)'
-        elif request.POST.get('sort_criteria') == 'Name (Z - A)':
-            context['shoes_brands'] = Shoe.objects.filter(brand__contains=searched).order_by('-name')
-            context['sort'] = 'Name (Z - A)'
-        elif request.POST.get('sort_criteria') == 'Price (Low - High)':
-            context['shoes_brands'] = Shoe.objects.filter(brand__contains=searched).order_by('price')
-            context['sort'] = 'Price (Low - High)'
-        elif request.POST.get('sort_criteria') == 'Price (High - Low)':
-            context['shoes_brands'] = Shoe.objects.filter(brand__contains=searched).order_by('-price')
-            context['sort'] = 'Price (High - Low)'
+    if request.POST.get('sort_criteria') == 'Name (A - Z)':
+        context['shoes_brands'] = Shoe.objects.filter(brand__contains=searched).order_by('name')
+        context['sort'] = 'Name (A - Z)'
+    elif request.POST.get('sort_criteria') == 'Name (Z - A)':
+        context['shoes_brands'] = Shoe.objects.filter(brand__contains=searched).order_by('-name')
+        context['sort'] = 'Name (Z - A)'
+    elif request.POST.get('sort_criteria') == 'Price (Low - High)':
+        context['shoes_brands'] = Shoe.objects.filter(brand__contains=searched).order_by('price')
+        context['sort'] = 'Price (Low - High)'
+    elif request.POST.get('sort_criteria') == 'Price (High - Low)':
+        context['shoes_brands'] = Shoe.objects.filter(brand__contains=searched).order_by('-price')
+        context['sort'] = 'Price (High - Low)'
     else:
         context['shoes_brands'] = Shoe.objects.filter(brand__contains=searched)
     return render(request, 'shoes/search_shoes.html', context)
@@ -91,10 +90,14 @@ def search_autocomp(request):
         'status': 200,
     }
     arr = []
+    sent_arr = []
     if address:
-        if Shoe.objects.filter(brand__contains=address):
-            arr.append(Shoe.objects.filter(brand__contains=address)[0].brand)
-    context['data'] = arr
+        for i in Shoe.objects.filter(brand__contains=address):
+            arr.append(i.brand)
+    for i in arr:
+        if arr.__contains__(i) and not sent_arr.__contains__(i):
+            sent_arr.append(i)
+    context['data'] = sent_arr
     return JsonResponse(context)
 
 def item_page(request, item_id):
@@ -265,10 +268,10 @@ def checkout(request):
 def add_To_Cart(request, cart_item_id):
     if not get_referer(request):
         raise Http404
-    if request.POST.get("sizeselect"):
+    if request.GET.get("sizeselect"):
         if Cart_item.objects.filter(product_id=cart_item_id, ordered=False, owner=request.user):
             check = Cart_item.objects.get(product_id=cart_item_id, owner=request.user)
-            check.selected_size += ", {y}".format(y=request.POST.get("sizeselect"))
+            check.selected_size += ", {y}".format(y=request.GET.get("sizeselect"))
             check.product_qty += 1
             check.save()
             messages.success(request, "Item Already in Cart")
@@ -276,7 +279,7 @@ def add_To_Cart(request, cart_item_id):
         Cart_item.objects.create(owner=request.user, product_id=cart_item_id, product_qty=1)
         messages.success(request, "Item Added To Cart")
         hh = Cart_item.objects.get(owner=request.user, product_id=cart_item_id)
-        hh.selected_size = request.POST.get("sizeselect")
+        hh.selected_size = request.GET.get("sizeselect")
         hh.save()
         return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
     else:

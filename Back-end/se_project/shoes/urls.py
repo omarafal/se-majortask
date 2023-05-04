@@ -19,7 +19,7 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='shoes/sign_out.html'), name='logout'),
     # Cart Pages & it's Functions
     path('cart/', views.cart, name='cart'),
-    path('add_product/<int:cart_item_id>', views.add_To_Cart, name='add_product'),
+    path('add_product/<int:cart_item_id>/', views.add_To_Cart, name='add_product'),
     path('add_quantity/<int:product_id>/<int:add_size_id>', views.additional_size, name='add_quantity'),
     path('remove_product/<int:delete_item_id>', views.remove_From_Cart, name='remove_product'),
     path('remove_quantity/<int:remove_quantity_id>', views.remove_quantity, name='remove_quantity'),

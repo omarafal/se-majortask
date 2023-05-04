@@ -1,0 +1,10 @@
+.my_bt {
+  border: none;
+  padding: 20px 5px;
+  background-color: black;
+  color: #fff;
+  cursor: pointer;
+  &:focus {
+    outline: none;
+  }
+}
