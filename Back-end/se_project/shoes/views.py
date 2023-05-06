@@ -133,13 +133,13 @@ def registration(request):
             return redirect('login')
         else:
             if not form.cleaned_data.get('password1') == form.cleaned_data.get('password2'):
-                msg.append("Password Doesn't Match :(")
+                msg.append("Password Doesn't Match")
             if User.objects.filter(username__contains=str(request.POST.get('username'))):
-                msg.append("Username Already Exists :(")
+                msg.append("Username Already Exists")
             if str(form.cleaned_data.get('username')).isnumeric():
-                msg.append("Username Must Contain Letters :(")
+                msg.append("Username Must Contain Letters")
             if User.objects.filter(email__contains=str(request.POST.get('email'))):
-                msg.append("Email Already Exists :(")
+                msg.append("Email Already Exists")
         return render(request, 'shoes/registration.html', {'form': form, 'page_name': 'Sign Up', 'errors': msg})
     else:
         form = RegistrationForm()
@@ -263,7 +263,7 @@ def checkout(request):
     else:
         context = {
             'page_name': "Checkout",
-            'Error': "Stop Refreshing :("
+            'Error': "Stop Refreshing"
         }
     return render(request, 'shoes/checkout.html', context)
 
@@ -338,13 +338,13 @@ def profile(request):
             if request.user.username == request.POST.get('username'):
                 pass
             else:
-                messages.error(request, 'Username Already Exists :(')
+                messages.error(request, 'Username Already Exists')
                 return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
         if request.POST.get('first_name').isnumeric() or request.POST.get('last_name').isnumeric():
-            messages.error(request, 'First/Last Name Can’t Be Entirely Numeric :(')
+            messages.error(request, 'First/Last Name Can’t Be Entirely Numeric')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
         if not request.POST.get('first_name') or not request.POST.get('last_name'):
-            messages.error(request, 'Do Not Leave First/Last Name Blank :(')
+            messages.error(request, 'Do Not Leave First/Last Name Blank')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
         else:
             if form.is_valid():

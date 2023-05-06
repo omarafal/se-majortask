@@ -29,7 +29,7 @@
                             <!-- Single item -->
                             {% if not cart_items %}
                                 <h3 style="text-align: center">
-                                    Nothing To Display :(
+                                    Nothing To Display
                                 </h3>
                                 <div style="justify-content: center; display: flex; margin-top: 15px">
                                     <a href="{% url 'shoes-home' %}">
@@ -111,13 +111,15 @@
                                     list = [],
                                     array = [],
                                     array3 = [],
+                                    ID_List = [],
                                     options = [],
                                     rem_qunatity = [],
                                     array2 = [];
-                                var j = 0;
+                                let j = 0;
                                 {% for i in cart_items %}
                                     array[j] = document.getElementById("{{ i.product.id }}");
                                     options[j] = array[j].querySelectorAll(".option");
+                                    ID_List[j] = "{{ i.product.id }}";
                                     array2[j] = $("#B{{ i.product.id }}");
                                     rem_qunatity[j] = $("#remove_quantity{{ i.product.id }}");
                                     array3[j] = $('#remove_btn{{ i.product.id }}');
@@ -133,27 +135,24 @@
                                         array[x].classList.toggle("active");
                                         event.stopPropagation();
                                     });
-                                    {% for i in cart_items %}
                                         rem_qunatity[x].on("click", function(e){
-                                            window.location.href = '/remove_quantity/{{ i.product.id }}';
+                                            window.location.href = '/remove_quantity/'+ID_List[x];
                                             e.stopPropagation();
                                         });
-                                        var selected = '';
+                                        let selected = '';
                                         options[x].forEach((option) => {
                                             option.addEventListener("click", (event) => {
                                                 array[x].classList.remove("active");
                                                 option.classList.add("selected");
                                                 selected = option.textContent;
-                                                window.location.href = '/add_quantity/{{ i.product.id }}/' + selected;
+                                                window.location.href = '/add_quantity/' + ID_List[x] + '/' + selected;
                                                 event.stopPropagation();
                                             });
                                         });
-                                    {% endfor %}
                                 }
-                                var h=0;
+                                let h=0;
                                 {% for i in cart_items %}
                                     array3[h].on("click", function (event){
-                                        console.log("Deleted");
                                         window.location.href = '/remove_product/{{ i.product.id }}';
                                         event.stopPropagation();
                                     });
@@ -225,7 +224,7 @@
                             {% endif %}
                             <script>
                                     function myfunc(){
-                                        alert("Your Cart Is Empty :(");
+                                        alert("Your Cart Is Empty");
                                     }
                                 </script>
                         </div>
