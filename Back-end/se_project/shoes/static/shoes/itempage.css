@@ -451,6 +451,9 @@ a {
   right: -41.8px !important;
   overflow-y: auto !important;
 }
+.custom-options:before{
+  display: none !important;
+}
 .custom-select{
   margin-top: -8px !important;
 }

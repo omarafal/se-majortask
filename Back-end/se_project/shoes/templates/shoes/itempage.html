@@ -60,8 +60,8 @@
                       </div>
                      <form method="POST" onsubmit="get_action(this)">
                       {% csrf_token %}
-                      <div class="size" style="max-width: 50vw; margin-top: 20px; display: inline-flex">
-                          <h5 id="size_text{{ i.id }}" style="max-width: 100px">select size:  <h5 id="size_choosen" style="max-width: 30px; font-size: 1.10rem"></h5></h5>
+                      <div class="size" style="max-width: 50vw; margin-top: 20px; display: inline-flex; cursor: pointer">
+                          <h5 class="size" id="size_text{{ i.id }}" style="max-width: 100px">select size:  <h5 id="size_choosen" style="max-width: 30px; font-size: 1.10rem"></h5></h5>
                               <select name="sort_criteria" id="sources" class="custom-select sources" placeholder=" ">
                                   <option value="38">38</option>
                                   <option value="39">39</option>
@@ -75,7 +75,7 @@
                       </div>
                       <script>
                           function myfunction(){
-                              alert("Please Sign in :(");
+                              alert("Please Sign in");
                           }
                       </script>
                       <div class="footer1" style="margin-top: 50px" >
