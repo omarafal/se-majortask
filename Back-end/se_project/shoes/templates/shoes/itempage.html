@@ -58,27 +58,45 @@
                                   </ul>
                               {% endif %}
                       </div>
-                     <form method="POST" onsubmit="get_action(this)">
+                     <!-- <form method="POST" onsubmit="get_action(this)"> -->
+                    <form method="POST" action="/add_product/{{ i.id }}/?sizeselect=">
                       {% csrf_token %}
-                      <div class="size" style="max-width: 50vw; margin-top: 20px; display: inline-flex; cursor: pointer">
-                          <h5 class="size" id="size_text{{ i.id }}" style="max-width: 100px">select size:  <h5 id="size_choosen" style="max-width: 30px; font-size: 1.10rem"></h5></h5>
-                              <select name="sort_criteria" id="sources" class="custom-select sources" placeholder=" ">
-                                  <option value="38">38</option>
-                                  <option value="39">39</option>
-                                  <option value="40">40</option>
-                                  <option value="41">41</option>
-                                  <option value="42">42</option>
-                                  <option value="43">43</option>
-                                  <option value="44">44</option>
-                                  <option value="45">45</option>
-                              </select>
-                      </div>
-                      <script>
+                      <div class="row">
+                        <div class="size col-2" style="margin-top: 10px">
+                            <h5 class="size" id="size_text{{ i.id }}">select size:</h5>
+                        </div>
+                        <div class="selectSize">
+                            <input id="size38" type="radio" value="38" name="sizeselect" class="invisible">
+                            <label for="size38" class="selectedSize">38</label>
+
+                            <input id="size39" type="radio" value="39" name="sizeselect" class="invisible">
+                            <label for="size39" class="selectedSize">39</label>
+
+                            <input id="size40" type="radio" value="40" name="sizeselect" class="invisible">
+                            <label for="size40" class="selectedSize">40</label>
+
+                            <input id="size41" type="radio" value="41" name="sizeselect" class="invisible">
+                            <label for="size41" class="selectedSize">41</label>
+
+                            <input id="size42" type="radio" value="42" name="sizeselect" class="invisible">
+                            <label for="size42" class="selectedSize">42</label>
+
+                            <input id="size43" type="radio" value="43" name="sizeselect" class="invisible">
+                            <label for="size43" class="selectedSize">43</label>
+
+                            <input id="size44" type="radio" value="44" name="sizeselect" class="invisible">
+                            <label for="size44" class="selectedSize">44</label>
+
+                            <input id="size45" type="radio" value="45" name="sizeselect" class="invisible">
+                            <label for="size45" class="selectedSize">45</label>
+                        </div> 
+                    </div>
+                        <script>
                           function myfunction(){
                               alert("Please Sign in");
                           }
                       </script>
-                      <div class="footer1" style="margin-top: 50px" >
+                      <div class="footer1" style="margin-top: 20px" >
                           {% if user.is_authenticated %}
                                   <button type="submit">
                                       <img src="http://co0kie.github.io/codepen/nike-product-page/cart.png" alt="">
