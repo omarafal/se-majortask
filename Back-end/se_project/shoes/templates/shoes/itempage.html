@@ -37,7 +37,7 @@
                 </header>
                   <div class="color" style="margin-top: 60px">
                               {% if more_items %}
-                                  <h5>select color:</h5>
+                                  <h5 class="size">select color:</h5>
                                   <ul style="margin: 0px">
                                   {% for j in more_items %}
                                       {% if j.color_hexa != "#000000" %}
@@ -58,14 +58,13 @@
                                   </ul>
                               {% endif %}
                       </div>
-                     <!-- <form method="POST" onsubmit="get_action(this)"> -->
-                    <form method="POST" action="/add_product/{{ i.id }}/?sizeselect=">
+                     <form method="POST" onsubmit="get_action(this)">
                       {% csrf_token %}
                       <div class="row">
-                        <div class="size col-2" style="margin-top: 10px">
+                        <div class="size col-2">
                             <h5 class="size" id="size_text{{ i.id }}">select size:</h5>
                         </div>
-                        <div class="selectSize">
+                        <div class="selectSize" id="sizeselector">
                             <input id="size38" type="radio" value="38" name="sizeselect" class="invisible">
                             <label for="size38" class="selectedSize">38</label>
 
@@ -96,7 +95,7 @@
                               alert("Please Sign in");
                           }
                       </script>
-                      <div class="footer1" style="margin-top: 20px" >
+                      <div class="footer1" >
                           {% if user.is_authenticated %}
                                   <button type="submit">
                                       <img src="http://co0kie.github.io/codepen/nike-product-page/cart.png" alt="">
@@ -110,10 +109,10 @@
                           {% endif %}
                           {% if messages %}
                               {% for message in messages %}
-                                  <div class="alert alert" style="text-align: left">{{ message }}</div>
+                                  <div class="alert alert" style="text-align: left; margin: 0; padding: 15px">{{ message }}</div>
                               {% endfor %}
                           {% else %}
-                              <div class="alert alert" style="text-align: left"><span id="msg_out"></span></div>
+                              <div class="alert alert" style="text-align: left; margin: 0; padding: 15px"><span id="msg_out"></span></div>
                           {% endif %}
                       </div>
                   </form>
@@ -126,61 +125,21 @@
 
 {% block additional %}
     <script>
-        $(".custom-select").each(function() {
-            var classes = $(this).attr("class"),
-                id      = $(this).attr("id"),
-                name    = $(this).attr("name");
-            var template =  '<div class="' + classes + '">';
-            template += '<span class="custom-select-trigger">' + $(this).attr("placeholder") + '</span>';
-            template += '<div class="custom-options">';
-            $(this).find("option").each(function() {
-                template += '<span class="custom-option ' + $(this).attr("class") + '" data-value="' + $(this).attr("value") + '">' + $(this).html() + '</span>';
-            });
-            template += '</div></div>';
-            $(this).wrap('<div class="custom-select-wrapper"></div>');
-            $(this).hide();
-            $(this).after(template);
-        });
-        $(".custom-option:first-of-type").hover(function() {
-            $(this).parents(".custom-options").addClass("option-hover");
-        }, function() {
-            $(this).parents(".custom-options").removeClass("option-hover");
-        });
-        $(".custom-select-trigger").on("click", function(event) {
-            $('html').one('click',function() {
-                $(".custom-select").removeClass("opened");
-            });
-            $(this).parents(".custom-select").toggleClass("opened");
-            event.stopPropagation();
-        });
-        $("#size_choosen").on("click", function(event) {
-            $('html').one('click',function() {
-                $(".custom-select").removeClass("opened");
-            });
-            $(".custom-select").toggleClass("opened");
-            event.stopPropagation();
-        });
-        {% for i in shoes %}
-            $("#size_text{{ i.id }}").on("click", function(event) {
-                $('html').one('click',function() {
-                    $(".custom-select").removeClass("opened");
-                });
-                $(".custom-select").toggleClass("opened");
+        const size_selector = document.getElementById("sizeselector"),
+              selected = size_selector.querySelectorAll(".selectedSize");
+        var op_selected = '';
+        selected.forEach((option) => {
+            option.addEventListener("click", (event) => {
+                op_selected = option.textContent;
+                console.log("My Size: " + option.textContent);
                 event.stopPropagation();
             });
+        });
+        {% for i in shoes %}
             var url = '/add_product/{{ i.id }}/?sizeselect=';
         {% endfor %}
-        var selected = '';
-        $(".custom-option").on("click", function() {
-            $(this).parents(".custom-select-wrapper").find("select").val($(this).data("value"));
-            $(this).parents(".custom-options").find(".custom-option").removeClass("selection");
-            $(this).addClass("selection");
-            selected = $(this).text();
-            $(this).parents(".custom-select").removeClass("opened");
-            document.getElementById("size_choosen").innerHTML=$(this).text();
-        });
         function get_action(form) {
-            url += selected;
+            url += op_selected;
             form.action = url;
         }
         if (history.scrollRestoration) {

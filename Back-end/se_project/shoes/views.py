@@ -277,10 +277,10 @@ def add_To_Cart(request, cart_item_id):
             check.selected_size += ", {y}".format(y=request.GET.get("sizeselect"))
             check.product_qty += 1
             check.save()
-            messages.success(request, "Item Already in Cart")
+            messages.success(request, "Size " + request.GET.get("sizeselect") + " Added")
             return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
         Cart_item.objects.create(owner=request.user, product_id=cart_item_id, product_qty=1)
-        messages.success(request, "Item Added To Cart")
+        messages.success(request, "Size " + request.GET.get("sizeselect") + " Added")
         hh = Cart_item.objects.get(owner=request.user, product_id=cart_item_id)
         hh.selected_size = request.GET.get("sizeselect")
         hh.save()
