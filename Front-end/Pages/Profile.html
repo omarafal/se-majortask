@@ -1,10 +1,25 @@
-<!doctype html>
-<html>
-	<head>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="shoezone1.css"/>
-    <link rel="stylesheet" href="Profile.css"/>
-    <link rel="icon" type="image/x-icon" href="/ShoeZone/static/Media/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+        <title>Shoezone</title>
+    
+    <link rel="icon" type="image/x-icon" href="ShoeZone/static/Media/favicon.png">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="/static/CSS/autocomplete.js"></script>
+    <link
+            rel="stylesheet"
+            href="https://unpkg.com/@trevoreyre/autocomplete-js/dist/style.css"
+    />
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="ShoeZone/static/CSS/profile.css"/>
+    <link rel="stylesheet" href="ShoeZone/static/CSS/home.css"/> 
+
+    <link rel="stylesheet" href="ShoeZone/static/CSS/registration.css"/>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"><!--Google Icons-->
@@ -12,139 +27,222 @@
     <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet"><!--Navbar/Slider-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"><!--Bootstrap (NavBar/Slider)-->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/><!--Animate On Scroll-->
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script><!--NavBar/slider-->
+
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script><!--Animate On Scroll-->
-    </head>
-<body class="p-0 m-0 border-0 bd-example">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script><!--NavBar/slider-->
+    <script src="ShoeZone/static/CSS/autocomplete.js"></script><!-- auto correct script-->
+
+
+</head>
+
+
+    <body class="p-0 m-0 border-0 bd-example">
+
+
     <header>
         <nav class="navbar navbar-expand-lg" style="background-color:#F1F1F1">
             <div class="container-fluid">
-                <!--<span class="logo"><img src="../../../media/shoes/Media/logo.png" style="height:50px;"/></span>-->
-                <a class="navbar-brand" href="shoezone1.html"><span><img draggable="false" src="../Media/logo.png" class="logo" draggalbe="false"/></span></a>
+                <span class="navbar-brand"><a href="/"><span><img draggable="false" src="ShoeZone/static/Media/logo.png" class="logo" draggalbe="false"/></a></span></span>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-	expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent"> 
+                <style>
+                    .colorP{
+                        color: darkorange;
+                    }
+                </style>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto me-auto mb-1 mb-lg-10 justify-content-end">
-                        <a href="shoezone1.html" style="text-decoration: none;" class="nav-link active item_menu" aria-current="page">
+                        <a href="/" style="text-decoration: none;" class="nav-link active item_menu" aria-current="page">
                             <li class="item nav-item menu_hover">Home</li>
                         </a>
-                        <a href="Men.html" style="text-decoration: none;" class="nav-link active item_menu" aria-current="page">
+                        <a href="/men/" style="text-decoration: none;" class="nav-link active item_menu" aria-current="page">
                             <li class="item nav-item menu_hover">Men</li>
                         </a>
-                        <a href="Women.html" style="text-decoration: none;" class="nav-link active item_menu" aria-current="page">
+                        <a href="/women/" style="text-decoration: none;" class="nav-link active item_menu" aria-current="page">
                             <li class="item nav-item menu_hover">Women</li>
                         </a>
-                        <a href="ShoppingCart.html" style="text-decoration: none;" class="nav-link active item_menu menu" aria-current="page" >
-                            <li class="item nav-item menu_hover">Shopping Cart</li>
-                        </a>
-                        <li class="nav-item dropdown menu item">
-                          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: black">
-                            Profile
-                          </a>
-                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item dropmenu_hover" href="Sign_in.html">SignIn/SignUp</a></li>
-                             </ul>
-                        </li>
+                        
+                            <a href="/cart/" style="text-decoration: none;" class="nav-link active item_menu menu" aria-current="page" >
+                                <li class="item nav-item menu_hover">Shopping Cart</li>
+                            </a>
+                        
+                        
+                                    <li class="nav-item dropdown menu item">
+                                        <a class="nav-link dropdown-toggle" id="mybt2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: black">
+                                            Profile
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <h6 class="wlcmMsg" style="text-align: center" id="greeting">Hi, Abdelrahman_Barakat</h6>
+                                            <hr style="margin:5px">
+                                            <li><a class="dropdown-item dropmenu_hover" href="/profile/" name="">Profile</a></li>
+                                            <li><a class="dropdown-item dropmenu_hover" href="/logout/" name="register">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                
                     </ul>
-                    <form class="d-flex input-group search" role="search">
-                        <input class="form-control" type="search" placeholder="Search" aria-label="Search"/>
-                        <button class="btn btn-outline-primary" type="submit">Search</button>
+                    <form class="d-flex input-group search" role="search" method=POST action="/search_shoes/">
+                        <input type="hidden" name="csrfmiddlewaretoken" value="MGCBr1P0kBqFSYufDbnb26NkqsxaMH5YMtNBA5BpoukVNWMJfzsZSPZ4BWzz76in">
+                        <span class="form-control autocomplete" id="autocomplete" style="display: inline-flex; border: none; padding: 0">
+                        <input id="search_in" onclick="wid_func()" class="form-control autocomplete-input" style="background-image: none;border: none; border-color: white" type="search" placeholder="Search For a Brand" aria-label="Search" name="searched" style="border-radius: 0.375rem 0px 0px 0.375rem" />
+                        <ul id="search_res" class="form-control autocomplete-result-list" style="z-index: 5; border: 0"></ul>
+                        </span>
+                        <button class="btn btn-outline-primary" type="submit" >Search</button>
                     </form>
                 </div>
-                <li class="nav-item ipad">
-                     <a class="nav-link " href="ShoppingCart.html">
-                        <i class="material-icons" style="font-size:42px;margin:5px 0px 0px 23px;" title="Shopping Cart">shopping_cart</i>
-                     </a>
-                </li>
-                <li class="nav-item dropdown ipad" style="margin-top: -10px">
-                     <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-person-circle material-icons" style="font-size:38px; margin:0px 0px 0px 16px;" title="Profile"></i>
-                     </a>
-                     <ul class="dropdown-menu" style="margin:1.4vw 0vw 0vw -190%">
-                        <li><a class="dropdown-item dropmenu_hover" href="Sign_in.html">SignIn/SignUp</a></li>
-                     </ul>
+                <script>
+                    function myfunction(){
+                        alert("Please Sign in");
+                    }
+                </script>
+                
+                    <li class="nav-item ipad" style="list-style:none;">
+                        <a class="nav-link " href="/cart/">
+                            <i class="material-icons" style="font-size:42px;margin:5px 0px 0px 23px;" title="Shopping Cart">shopping_cart</i>
+                        </a>
+                    </li>
+                
+                <li class="nav-item dropdown ipad" style="margin-top: -10px;list-style:none;">
+                    <a class="nav-link " id="mybt" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i id="profil" class="bi bi-person-circle material-icons" style="font-size:38px; margin:0px 0px 0px 16px;" title="Profile"></i>
+                    </a>
+                    <ul class="dropdown-menu" style="margin:1.4vw 0vw 0vw -190%">
+                        
+                            <h6 class="wlcmMsg" style="text-align: center" id="greeting">Hi, Abdelrahman_Barakat</h6>
+                            <hr style="margin:5px">
+                            <li><a class="dropdown-item dropmenu_hover" href="/profile/" name="">Profile</a></li>
+                            <li><a class="dropdown-item dropmenu_hover" href="/logout/" name="register">Logout</a></li>
+                        
+                    </ul>
                 </li>
             </div>
         </nav>
-    </header>  
+    </header>
+
+<span id="page">
+
     <main>
-        <div class="container rounded bg-white mt-5 mb-0">
-            <div class="row">
-                <div class="p-4 py-4">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="text-right">Profile Settings</h4>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <label class="labels">First Name</label>
-                            <input type="text" class="form-control" placeholder=" enter your first name" value="">
+        <div class="container">
+            <form id="form" method="POST">
+                    <input type="hidden" name="csrfmiddlewaretoken" value="MGCBr1P0kBqFSYufDbnb26NkqsxaMH5YMtNBA5BpoukVNWMJfzsZSPZ4BWzz76in">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="text-right" style="margin-bottom: 0px">Profile Settings</h4>
                         </div>
-                        <div class="col-md-12 mt-3">
-                            <label class="labels">Last Name</label>
-                            <input type="text" class="form-control" value="" placeholder="enter your last name">
+                                
+                                
+                            <div class="input-control">
+                                <label class="label mb-1" for="first_name">First Name</label>
+                                <input type="text" name="first_name" value="Abdelrahman Mohamed" maxlength="150" id="id_first_name">
+                            </div>
+                            <div class="input-control">
+                                <label class="label mb-1 mt-1" for="last_name">Last Name</label>
+                                <input type="text" name="last_name" value="Barakat" maxlength="150" id="id_last_name">
+                            </div>
+                            <div class="input-control">
+                                <label class="label mb-1 mt-1" for="username">Username</label>
+                                <input type="text" name="username" value="Abdelrahman_Barakat" maxlength="150" required id="id_username">
+                            </div>
+                            <div class="input-control">
+                                <label class="label mb-1 mt-1" for="email">Email</label>
+                                <input type="email" name="email" value="katloop976@gmail.com" maxlength="254" id="id_email">
+                            </div>
+                        <div class="mt-1 text-center"><a href="/password_change/"><button class="btn" style="background-color: whitesmoke;border-color: white;box-shadow: 0px 0px 0px 0px whitesmoke; color: black" type="button">Change Password?</button></a></div>
+                        <div class="mt-1 text-center">
+                            <button class="btn btn-primary profile-button" type="submit">Save Changes</button>
                         </div>
-                        <div class="col-md-12 mt-3">
-                            <label class="labels">Username</label>
-                            <input type="text" class="form-control" value="" placeholder="enter your username"></div>
-                        <div class="col-md-12 mt-3">
-                            <label class="labels">Email</label>
-                            <input type="text" class="form-control" placeholder="enter your email " value="">
-                        </div>
-                    </div>
-                    <div class="mt-3 text-center">
-                        <button class="btn" style="background-color: white;border-color: white;box-shadow: 0px 0px 0px 0px white;" type="button">Change Password?</button>
-                    </div>
-                    <div class="mt-3 text-center">
-                        <button class="btn btn-primary profile-button" type="button">Save Profile</button>
-                    </div>
-                </div>
+                    </form>
             </div>
-        </div>
-    </main> 
+    </main>
+
+</span>
+</body>
+</body>
+
+
+    <script>
+        var main_url = '';
+        new Autocomplete('#autocomplete', {
+            search: input => {
+                const url = '/search_auto/?address=' + input
+                main_url = '/search_shoes/?criteria=' + input
+
+                return new Promise(resolve => {
+                        fetch(url)
+                        .then(response => response.json())
+                        .then(data =>{
+                            resolve(data.data)
+                        })
+                })
+            },
+            onSubmit : result => {
+                window.location.href = main_url;
+            }
+        });
+        function wid_func() {
+            $('#search_res').css("width", "99.8%");
+        }
+    </script>
+    <script>
+        $('#mybt').on("click", function(e) {
+            $('.dropdown-menu').toggleClass("show");
+            $('#profil').toggleClass("colorP");
+            $('.nav-link').toggleClass("show");
+            $('html').one('click',function() {
+                $(".dropdown-menu").toggleClass("show");
+                $('#profil').toggleClass("colorP");
+            });
+            e.stopPropagation();
+        });
+    </script>
+    <script defer src="/static/CSS/base.js"></script>
     <footer class="footer">
+
         <span style="margin: 20px 0 0 20px">
             <section style="color: white; font-weight: bold;"><h3 class="headmobile ">Social Media</h3></section>
             <section  style="text-align: center"><a href="https://www.instagram.com/shoe.zone21/?igshid=YmMyMTA2M2Y%3D" target="_blank">
-                <img class="iconmob" src="../Media/instagram.png" style="margin: 15px 0px;"/></a>
+                <img class="iconmob" src="ShoeZone/static/Media/instagram.png" style="margin: 15px 0px;"/></a>
                 </section>
             <section  style="text-align: center"><a href="https://www.facebook.com/profile.php?id=100064368121508&mibextid=ZbWKwL" target="_blank">
-                <img class="iconmob" src="../Media/facebook.png" style="margin: 15px 0px;"/></a>
-            </section>
+                <img class="iconmob" src="ShoeZone/static/Media/facebook.png" style="margin: 15px 0px;"/></a>
+                </section>
         </span>
+
         <span style="margin: 20px 0 0 20px">
             <section style="color: white; font-weight: bold;"><h3 class="headmobile ">Location</h3></section>
             <section section style="text-align: center"><a  href="https://www.google.com/maps/place/30%C2%B003'39.4%22N+31%C2%B020'03.9%22E/" target="_blank">
-            <img class="iconmob" src="../Media/Location.png" style="margin:15px 0px;"/></a></section>
+            <img class="iconmob" src="ShoeZone/static/Media/Location.png" style="margin:15px 0px;"/></a></section>
         </span>
+
         <span style="margin: 20px 0 0 25px">
             <section style="color: white; font-weight: bold;"><h3 class="headmobile" style="text-align: center">Contact Us</h3></section>
-            <section><img src="../Media/telephone.png" class="iconmob phone" ><h5 class="num">01022611981</h5></section>
+            <section><img src="ShoeZone/static/Media/telephone.png" class="iconmob phone" ><h5 class="num">01022611981</h5></section>
         </span>
+
     </footer>
     <section style="background-color: #111; height: 70px; text-align: center">
         <span style="display: inline">
-            <img src="../Media/QubeLogo.png" style="height: 64px;align-self: center; "><p style="color:white;display: inline">TeamQUBE®</p>
+            <img src="ShoeZone/static/Media/QubeLogo.png" style="height: 64px;align-self: center; "><p style="color:white;display: inline">TeamQUBE®</p>
             </span>
     </section>
-</body>
-<script>
-    AOS.init({
-        duration:800,
-        offset:300,
-        easing:'ease-out-back',
-    });
-</script>
-<script>
-    if (history.scrollRestoration) {
-      history.scrollRestoration = 'manual';
-      }
-  else {
-      window.onbeforeunload = function () {
-          window.scrollTo(0, 0);
-      }
-  }
-</script>
+
+
+
+    <script>
+        AOS.init({
+            duration:800,
+            offset:300,
+            easing:'ease-out-back',
+        });
+    </script>
+    <script>
+        if (history.scrollRestoration) {
+            history.scrollRestoration = 'manual';
+        }
+        else {
+            window.onbeforeunload = function () {
+                window.scrollTo(0, 0);
+            }
+        }
+    </script>
+
 </html>
